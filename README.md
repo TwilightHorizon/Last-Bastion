@@ -1,7 +1,6 @@
+# Game Title: [Last Bastion]
 
-readme_content = """# Game Title: [Last Bastion]
 
-![Game Logo]
 
 ## 🎮 About the Game
 Last Bastion is a thrilling tower defense experience that combines unique elements with a captivating storyline. Set in a world of unknown, players will embark on an adventure filled with extreme tower defense.
