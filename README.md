@@ -1,3 +1,5 @@
+STILL MAKING IT! (working one it slowly during my free time as a hobby)
+
 # Game Title: [Last Bastion]
 
 
