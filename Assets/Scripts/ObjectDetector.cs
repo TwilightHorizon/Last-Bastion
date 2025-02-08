@@ -7,6 +7,9 @@ public class ObjectDetector : MonoBehaviour
     [SerializeField]
     private TowerSpawner   towerSpawner;
 
+    [SerializeField]
+    private TowerDataViewer towerDataViewer;
+
     private Camera mainCamera;
     private Ray ray;
     private RaycastHit hit;
@@ -28,16 +31,20 @@ public class ObjectDetector : MonoBehaviour
 
             // 2D 모니터를 통해 3D 월드의 오브젝트를 마우스로 선택
             // 광선에 부딫히는 오브젝트를 검출해서 hit에 저장
-            if(Physics.Raycast(ray, out hit, Mathf.Infinity))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                if(hit.collider.tag == "Tile")
+                if (hit.collider.tag == "Tile")
                 {
                     // Debug.Log("타일 클릭");
                     towerSpawner.SpawnTimer(hit.transform);
                 }
+                else if (hit.collider.tag == "Tower")
+                {
+                    // Debug.Log("타워 클릭");
+                    towerDataViewer.OnPanel(hit.transform);
+                }
+                // hope this works LOL
             }
-            // hope this works LOL
-
         }        
     }
 }

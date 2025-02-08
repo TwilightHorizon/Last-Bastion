@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4392690041525402664}
   - component: {fileID: -8202890658241204298}
   m_Layer: 0
-  m_Name: Enemy01
+  m_Name: Enemy02
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e992e386fe23e15408a144b3c4fead50, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3e4541578fe4646439321b0b0408676c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6afb19f8d76e73a409cbd22c3cf67e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyAttackDamage: 10
-  gold: 10
+  enemyAttackDamage: 15
+  gold: 15
 --- !u!114 &4900673191773082773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e634f8f0bc66ddd47b5410a2305e5691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 1.5
   moveDirection: {x: 0, y: 0, z: 0}
 --- !u!58 &4392690041525402664
 CircleCollider2D:
@@ -163,4 +163,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf8d2c7c4a00f54587f3d2ee737eafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 30
+  maxHP: 60

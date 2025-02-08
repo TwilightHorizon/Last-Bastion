@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("Prefab for the enemy that spawns")]
-    [SerializeField]
-    private GameObject enemyPrefab;
-    
+    //[Header("Prefab for the enemy that spawns")]
+    //[SerializeField]
+    //private GameObject enemyPrefab;
 
-    [Header("Time between enemy spawns")]
-    [SerializeField]
-    private float spawnTime;
+    private Wave currentWave;
+
+    //[Header("Time between enemy spawns")]
+    //[SerializeField]
+    //private float spawnTime;
     [SerializeField]
     private Transform[] wayPoints;
 
@@ -23,9 +24,6 @@ public class EnemySpawner : MonoBehaviour
     private Transform canvasTransform;
 
 
-    private List<Enemy> enemyList;
-    public List<Enemy> EnemyList => enemyList;
-
     [Header("Player Stats")]
     [SerializeField]
     private PlayerHP playerHP;
@@ -33,20 +31,41 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private PlayerGold playerGold;
 
+    private int currentEnemyCount = 0;
+    private List<Enemy> enemyList;
+    public List<Enemy> EnemyList => enemyList;
 
 
+    public int CurrentEnemyCount => currentEnemyCount;
+    public int MaxEnemyCount => currentWave.maxEnemyCount;
 
     private void Awake()
     {
         enemyList  = new List<Enemy>();
-        StartCoroutine(SpawnEnemy());
+        // StartCoroutine(SpawnEnemy());
+    }
+
+    public void StartWave(Wave wave)
+    {
+        currentWave = wave;
+        currentEnemyCount = currentWave.maxEnemyCount;
+        StartCoroutine(SpawnEnemy());  
+        
     }
 
     private IEnumerator SpawnEnemy()
     {
-        while(true)
+
+        int spawnEnemyCount = 0;
+
+        while(spawnEnemyCount < currentWave.maxEnemyCount)
+        //while(true)
         {
-            GameObject clone = Instantiate(enemyPrefab);
+            // GameObject clone = Instantiate(enemyPrefab);
+
+            // 웨이브에 등장하는 적 중 하나를 랜덤으로 선택, 적 오브젝트 생성
+            int enemyIndex = Random.Range(0, currentWave.enemyPrefabs.Length);
+            GameObject clone = Instantiate(currentWave.enemyPrefabs[enemyIndex]);
             Enemy enemy = clone.GetComponent<Enemy>();
 
             enemy.Setup(this, wayPoints);
@@ -54,9 +73,11 @@ public class EnemySpawner : MonoBehaviour
 
             SpawnEnemyHPSlider(clone);
 
+            spawnEnemyCount++;
+
            
 
-            yield return new WaitForSeconds(spawnTime);
+            yield return new WaitForSeconds(currentWave.spawnTime);
         }
 
     }
@@ -75,6 +96,7 @@ public class EnemySpawner : MonoBehaviour
             playerGold.CurrentGold += gold;
         }
 
+        currentEnemyCount--;
         enemyList.Remove(enemy);
         Destroy(enemy.gameObject);
 
