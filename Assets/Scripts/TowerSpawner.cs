@@ -5,40 +5,93 @@ using UnityEngine;
 public class TowerSpawner : MonoBehaviour
 {
     [SerializeField]
-    private GameObject towerPrefab;
+    private TowerTemplate[] towerTemplate;
+    //[SerializeField]
+    //private GameObject towerPrefab;
     [SerializeField]
     private EnemySpawner enemySpawner;
-
-    [SerializeField]
-    private int towerBuildCost = 50; // amount of gold required to build a tower
+    //[SerializeField]
+    //private int towerBuildCost = 50; // amount of gold required to build a tower
     [SerializeField]
     private PlayerGold playerGold;   // to acceses the player gold and reduce it
 
+    [SerializeField]
+    private SystemTextViewer systemTextViewer;
 
-    public void SpawnTimer(Transform tileTransform)
+    private bool isOnTowerButton = false;
+    private GameObject followTowerClone = null;
+
+    private int towerType;
+
+    public void ReadyToSpawnTower(int type)
     {
-        Tile tile = tileTransform.GetComponent<Tile>();
+        towerType = type;
+        if (isOnTowerButton) return;
+        if (towerTemplate[towerType].weapon[0].cost > playerGold.CurrentGold)
+        {
+            systemTextViewer.PrintText(SystemType.Money);
+            return;
+        }
+        isOnTowerButton = true;
 
-        if(towerBuildCost > playerGold.CurrentGold)
+        followTowerClone = Instantiate(towerTemplate[towerType].followTowerPrefab);
+
+        StartCoroutine(OnTowerCancelSystem());
+    }
+
+    public void SpawnTower(Transform tileTransform)
+    {
+
+        if(!isOnTowerButton)
         {
             return;
         }
+
+        Tile tile = tileTransform.GetComponent<Tile>();
+
+        //if (towerTemplate.weapon[0].cost > playerGold.CurrentGold)
+        //{
+        //    systemTextViewer.PrintText(SystemType.Money);   
+        //    return;
+        //}
 
         if (tile.IsBuildTower)
         {
+            systemTextViewer.PrintText(SystemType.Build);
             return;
         }
-    
+
+
+        isOnTowerButton = false;
         tile.IsBuildTower = true;
-        playerGold.CurrentGold -= towerBuildCost; // reduce the player gold by the cost
+        playerGold.CurrentGold -= towerTemplate[towerType].weapon[0].cost; // reduce the player gold by the cost
 
         Vector3 position = tileTransform.position + Vector3.back;
 
-        GameObject clone = Instantiate(towerPrefab, position, Quaternion.identity);
+        GameObject clone = Instantiate(towerTemplate[towerType].towerPrefab, position, Quaternion.identity);
 
-        clone.GetComponent<TowerWeapon>().Setup(enemySpawner);
+        clone.GetComponent<TowerWeapon>().Setup(enemySpawner, playerGold, tile);
+
+        Destroy(followTowerClone);
+
+        StopCoroutine(OnTowerCancelSystem());
 
     }
+
+    private IEnumerator OnTowerCancelSystem()
+    {
+        while (true)
+        {
+            if (Input.GetMouseButtonDown(1) || Input.GetKeyDown(KeyCode.Escape))
+            {
+                isOnTowerButton = false;
+                Destroy(followTowerClone);
+                break;
+            }
+            yield return null;
+        }
+    }
+
 
 }
 

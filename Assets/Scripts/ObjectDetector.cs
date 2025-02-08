@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ObjectDetector : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class ObjectDetector : MonoBehaviour
     private Camera mainCamera;
     private Ray ray;
     private RaycastHit hit;
+    private Transform hitTransform = null;
 
     private void Awake()
     {
@@ -22,6 +24,11 @@ public class ObjectDetector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return;
+        }
+
         if(Input.GetMouseButtonDown(0))
         {
             // 카메라 위치에서 화면의 마우스 위치를 관통하는 광선 생성
@@ -33,10 +40,11 @@ public class ObjectDetector : MonoBehaviour
             // 광선에 부딫히는 오브젝트를 검출해서 hit에 저장
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
+                hitTransform = hit.transform;
                 if (hit.collider.tag == "Tile")
                 {
                     // Debug.Log("타일 클릭");
-                    towerSpawner.SpawnTimer(hit.transform);
+                    towerSpawner.SpawnTower(hit.transform);
                 }
                 else if (hit.collider.tag == "Tower")
                 {
@@ -45,6 +53,16 @@ public class ObjectDetector : MonoBehaviour
                 }
                 // hope this works LOL
             }
-        }        
+        }
+        else if(Input.GetMouseButtonUp(0))
+        {
+
+            //Debug.Log("HI");
+            if (hitTransform == null || !hitTransform.CompareTag("Tower"))
+            {
+                towerDataViewer.OffPanel();
+            }
+            hitTransform = null;
+        }
     }
 }

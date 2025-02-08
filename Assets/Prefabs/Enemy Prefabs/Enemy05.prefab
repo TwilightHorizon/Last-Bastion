@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4900673191773082773}
   - component: {fileID: 4392690041525402664}
   - component: {fileID: -8202890658241204298}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy05
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e634f8f0bc66ddd47b5410a2305e5691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1.5
+  moveSpeed: 0.5
   moveDirection: {x: 0, y: 0, z: 0}
 --- !u!58 &4392690041525402664
 CircleCollider2D:
