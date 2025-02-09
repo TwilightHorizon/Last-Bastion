@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAttackDamage: 15
-  gold: 15
+  gold: 25
 --- !u!114 &4900673191773082773
 MonoBehaviour:
   m_ObjectHideFlags: 0

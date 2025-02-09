@@ -47,7 +47,7 @@ public class Login : LoginBase
             {
 
                 SetMessage($"Welcome {inputFieldID.text}!");
-                Utils.LoadScene(nextScene);
+                Utils.LoadScene(SceneNames.Lobby);
 
             }
             else
