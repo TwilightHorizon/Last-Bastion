@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour
 
         for(int i = 0; i < enemySpawner.EnemyList.Count; i++)
         {
-            enemySpawner.EnemyList[i].gameObject.SetActive(false);
+            Destroy(enemySpawner.EnemyList[i].gameObject);
         }
 
 

@@ -85,15 +85,7 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    public void DestroyAllEnemy()
-    {
-        for(int i = 0; i < enemyList.Count; i++)
-        {
-            Destroy(enemyList[i]);
-        }
-        enemyList.Clear();
-        
-    }
+    
 
 
     public void DestroyEnemy(EnemyDestroyType type, Enemy enemy, int gold)
