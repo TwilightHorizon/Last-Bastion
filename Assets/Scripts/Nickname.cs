@@ -16,6 +16,8 @@ public class Nickname : LoginBase
     private TMP_InputField inputFieldNickname;
     [SerializeField]
     private Button buttonUpdateNickname;
+    [SerializeField]
+    private Button buttonExitButton;
 
     private void OnEnable()
     {
@@ -29,6 +31,7 @@ public class Nickname : LoginBase
         if (IsFieldDataEmpty(imageNickname, inputFieldNickname.text, "Nickname")) return;
 
         buttonUpdateNickname.interactable = false;
+        buttonExitButton.interactable = false;
 
         UpdateNickname();
     }
@@ -39,6 +42,7 @@ public class Nickname : LoginBase
         {
 
             buttonUpdateNickname.interactable = true;
+            buttonExitButton.interactable = true;
             if (callback.IsSuccess())
             {
                 SetMessage($"Changed nickname to {inputFieldNickname.text}.");

@@ -70,6 +70,10 @@ public class RegisterAccount : LoginBase
                     if(callback.IsSuccess())
                     {
                         SetMessage($"Register success! Welcome {inputID.text}!");
+
+                        // After success in creating new account, create new gamedata for this new user account
+                        BackendGameData.Instance.GameDataInsert();
+
                         Utils.LoadScene(SceneNames.Lobby);
                     }
                 });

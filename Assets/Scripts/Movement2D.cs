@@ -14,6 +14,9 @@ public class Movement2D : MonoBehaviour
     private void Update()
     {
         transform.position += moveDirection * moveSpeed * Time.deltaTime;
+
+        if (transform.position.x >= 10 || transform.position.x <= -10 || transform.position.y >= 7 || transform.position.y <= -7) gameObject.GetComponent<EnemyHP>().TakeDamage(30);
+
     }
 
     public void MoveTo(Vector3 direction)

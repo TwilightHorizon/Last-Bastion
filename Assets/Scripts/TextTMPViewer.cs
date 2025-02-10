@@ -29,6 +29,12 @@ public class TextTMPViewer : MonoBehaviour
     [SerializeField]
     private EnemySpawner enemySpawner;
 
+    [Header("Score")]
+    [SerializeField]
+    private TextMeshProUGUI textScore;
+    [SerializeField]
+    private GameController gameController;
+
     private void Update()
     {
         textTMP.text = playerHP.CurrentHP + " / " + playerHP.MaxHP;
@@ -40,6 +46,9 @@ public class TextTMPViewer : MonoBehaviour
             textEnemyCount.text = "0 / 0";
         }
         else textEnemyCount.text = enemySpawner.CurrentEnemyCount + " / " + enemySpawner.MaxEnemyCount;
+
+        textScore.text = $"Score: {gameController.Score}";
+
     }
 
 }

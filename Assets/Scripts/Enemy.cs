@@ -14,6 +14,15 @@ public class Enemy : MonoBehaviour
     private Movement2D movement2D;
     private EnemySpawner enemySpawner;
 
+
+    [SerializeField]
+    private int scorePoint = 100; // TODO: make different score incrememnt based on enemy type
+
+
+    
+    private GameController gameController;
+
+
     [SerializeField]
     private float enemyAttackDamage = 10.0f;
 
@@ -23,11 +32,12 @@ public class Enemy : MonoBehaviour
 
     public float EnemyAttackDamage => enemyAttackDamage;
 
-    public void Setup(EnemySpawner enemySpawner, Transform[] wayPoints)
+    public void Setup(EnemySpawner enemySpawner, Transform[] wayPoints, GameController gameController)
     {
 
         movement2D = GetComponent<Movement2D>();
         this.enemySpawner = enemySpawner;
+        this.gameController = gameController;
 
         // 적 이동 경로 Waypoints 정보 설정
         wayPointCount = wayPoints.Length;
@@ -85,6 +95,12 @@ public class Enemy : MonoBehaviour
     {
 
         enemySpawner.DestroyEnemy(type, this, gold);
+
+        if(type == EnemyDestroyType.Kill)
+        {
+            gameController.Score += scorePoint;
+        }
+        // 
 
     }
     

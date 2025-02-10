@@ -31,6 +31,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private PlayerGold playerGold;
 
+    [SerializeField]
+    private GameController gameController;
+
     private int currentEnemyCount = 0;
     private List<Enemy> enemyList;
     public List<Enemy> EnemyList => enemyList;
@@ -68,7 +71,7 @@ public class EnemySpawner : MonoBehaviour
             GameObject clone = Instantiate(currentWave.enemyPrefabs[enemyIndex]);
             Enemy enemy = clone.GetComponent<Enemy>();
 
-            enemy.Setup(this, wayPoints);
+            enemy.Setup(this, wayPoints, gameController);
             enemyList.Add(enemy);
 
             SpawnEnemyHPSlider(clone);
@@ -81,6 +84,17 @@ public class EnemySpawner : MonoBehaviour
         }
 
     }
+
+    public void DestroyAllEnemy()
+    {
+        for(int i = 0; i < enemyList.Count; i++)
+        {
+            Destroy(enemyList[i]);
+        }
+        enemyList.Clear();
+        
+    }
+
 
     public void DestroyEnemy(EnemyDestroyType type, Enemy enemy, int gold)
     {   

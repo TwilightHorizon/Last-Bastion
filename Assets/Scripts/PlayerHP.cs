@@ -13,6 +13,12 @@ public class PlayerHP : MonoBehaviour
     public float MaxHP => maxHP;
     public float CurrentHP => currentHP;
 
+    [SerializeField]
+    private GameController gameController;
+
+
+    
+
     private void Awake()
     {
         currentHP = maxHP;
@@ -23,8 +29,8 @@ public class PlayerHP : MonoBehaviour
         currentHP -= damage;
         if (currentHP <= 0.0f)
         {
-            // end game
-
+            gameController.GameOver();
+            
         }
     }   
 

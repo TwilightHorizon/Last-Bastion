@@ -13,6 +13,10 @@ public class UserInfo : MonoBehaviour
     private static UserInfoData data = new UserInfoData();
     public static UserInfoData Data => data;
 
+
+    [SerializeField]
+    private GameObject loadingPanel;
+
     public void GetUserInfoFromBackend()
     {
         Backend.BMember.GetUserInfo(callback =>
@@ -43,9 +47,18 @@ public class UserInfo : MonoBehaviour
                 Debug.LogError(callback.GetMessage());
             }
 
+
+            turnOffScreen();
+
+
             onUserInfoEvent?.Invoke();
 
         });
+    }
+
+    private void turnOffScreen()
+    {
+        loadingPanel.SetActive(false);
     }
 
 
