@@ -7,6 +7,9 @@ public class WaveSystem : MonoBehaviour
 {
 
     [SerializeField]
+    private GameController gameController;
+
+    [SerializeField]
     private Wave[] waves;
     [SerializeField]
     private EnemySpawner enemySpawner;
@@ -21,9 +24,23 @@ public class WaveSystem : MonoBehaviour
         if (enemySpawner.EnemyList.Count == 0 && currentWaveIndex < waves.Length - 1)
         {
             currentWaveIndex++;
-            enemySpawner.StartWave(waves[currentWaveIndex]);
-        }
 
+            if(currentWaveIndex == waves.Length - 1)
+            {
+                enemySpawner.StartWave(waves[currentWaveIndex], true);
+
+            }
+            else
+            {
+                enemySpawner.StartWave(waves[currentWaveIndex], false);
+
+            }
+
+        }
+        //else if(enemySpawner.EnemyList.Count == 0 && currentWaveIndex == waves.Length - 1)
+        //{
+        //    gameController.GameOver();
+        //}
 
     }
 }
@@ -32,6 +49,6 @@ public class WaveSystem : MonoBehaviour
 public class Wave
 {
     public float spawnTime; // interval of enemy spawn of this wave
-    public int maxEnemyCount; // number of enemy spawn in this wave
+    public int[] maxEnemyCount; // number of enemy spawn in this wave
     public GameObject[] enemyPrefabs; // the types of enemies spawning in this wave
 }

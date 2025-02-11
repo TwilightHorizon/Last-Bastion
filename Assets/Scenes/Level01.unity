@@ -3532,25 +3532,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f712a0501e0fd4e8e017c205ab1d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 1838760455}
   waves:
-  - spawnTime: 0.5
-    maxEnemyCount: 10
+  - spawnTime: 1.5
+    maxEnemyCount: 0a00000005000000
     enemyPrefabs:
     - {fileID: 3070370818181417406, guid: e97f8778091536644a98887506bc6e74, type: 3}
+    - {fileID: 3070370818181417406, guid: 0464b1323c2d230488dc2e3e48da3291, type: 3}
   - spawnTime: 0.5
-    maxEnemyCount: 20
+    maxEnemyCount: 0a0000000f00000005000000
     enemyPrefabs:
     - {fileID: 3070370818181417406, guid: 0464b1323c2d230488dc2e3e48da3291, type: 3}
+    - {fileID: 3070370818181417406, guid: e97f8778091536644a98887506bc6e74, type: 3}
+    - {fileID: 3070370818181417406, guid: 1bb61f41d8be2814ca971a46a02e529d, type: 3}
   - spawnTime: 1
-    maxEnemyCount: 20
+    maxEnemyCount: 0a00000005000000010000000a000000
     enemyPrefabs:
     - {fileID: 3070370818181417406, guid: 5f85b00c04c06864e93644860fc15cf1, type: 3}
     - {fileID: 3070370818181417406, guid: f9971a6d9a5bb8444a239564f75f332f, type: 3}
     - {fileID: 3070370818181417406, guid: 0464b1323c2d230488dc2e3e48da3291, type: 3}
-  - spawnTime: 0.6
-    maxEnemyCount: 20
+    - {fileID: 3070370818181417406, guid: e97f8778091536644a98887506bc6e74, type: 3}
+  - spawnTime: 0.5
+    maxEnemyCount: 0f000000190000000a0000000a000000
     enemyPrefabs:
     - {fileID: 3070370818181417406, guid: 5f85b00c04c06864e93644860fc15cf1, type: 3}
+    - {fileID: 3070370818181417406, guid: e97f8778091536644a98887506bc6e74, type: 3}
+    - {fileID: 3070370818181417406, guid: 1bb61f41d8be2814ca971a46a02e529d, type: 3}
+    - {fileID: 3070370818181417406, guid: f9971a6d9a5bb8444a239564f75f332f, type: 3}
+  - spawnTime: 0.5
+    maxEnemyCount: 1e000000050000000a0000000f000000
+    enemyPrefabs:
+    - {fileID: 3070370818181417406, guid: 5f85b00c04c06864e93644860fc15cf1, type: 3}
+    - {fileID: 3070370818181417406, guid: f9971a6d9a5bb8444a239564f75f332f, type: 3}
+    - {fileID: 3070370818181417406, guid: 1bb61f41d8be2814ca971a46a02e529d, type: 3}
+    - {fileID: 3070370818181417406, guid: e97f8778091536644a98887506bc6e74, type: 3}
   enemySpawner: {fileID: 413252166}
 --- !u!1 &435064611
 GameObject:
@@ -5875,7 +5890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c3a6e9ac9f9974db4423eb219fa3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGold: 2000
+  currentGold: 2367
 --- !u!1001 &744745396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6498,9 +6513,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 0b5bd501e9c39ca4598d85fa9b3319a1, type: 3}
+  m_audioClip: {fileID: 8300000, guid: a3d3a7f428924af459ee5073a6b7d66e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6593,7 +6608,7 @@ Transform:
   m_GameObject: {fileID: 850796178}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 650.00616, y: 785.19556, z: -2.292286}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

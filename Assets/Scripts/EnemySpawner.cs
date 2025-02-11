@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -35,12 +36,17 @@ public class EnemySpawner : MonoBehaviour
     private GameController gameController;
 
     private int currentEnemyCount = 0;
+    private int maxEnemyCount = 0;
     private List<Enemy> enemyList;
     public List<Enemy> EnemyList => enemyList;
 
+    [SerializeField]
+    private Button buttonStartWave;
+
+    private bool finalWave = false;
 
     public int CurrentEnemyCount => currentEnemyCount;
-    public int MaxEnemyCount => currentWave.maxEnemyCount;
+    public int MaxEnemyCount => maxEnemyCount;
 
     private void Awake()
     {
@@ -48,10 +54,18 @@ public class EnemySpawner : MonoBehaviour
         // StartCoroutine(SpawnEnemy());
     }
 
-    public void StartWave(Wave wave)
+    public void StartWave(Wave wave, bool lastWave)
     {
+        finalWave = lastWave;
         currentWave = wave;
-        currentEnemyCount = currentWave.maxEnemyCount;
+        for (int i = 0; i < currentWave.maxEnemyCount.Length; i++) 
+        {
+            currentEnemyCount += currentWave.maxEnemyCount[i];
+        }
+        maxEnemyCount = currentEnemyCount;
+
+
+        // currentEnemyCount = currentWave.maxEnemyCount;
         StartCoroutine(SpawnEnemy());  
         
     }
@@ -59,29 +73,42 @@ public class EnemySpawner : MonoBehaviour
     private IEnumerator SpawnEnemy()
     {
 
-        int spawnEnemyCount = 0;
+        buttonStartWave.interactable = false;
 
-        while(spawnEnemyCount < currentWave.maxEnemyCount)
-        //while(true)
+        for (int i = 0; i < currentWave.maxEnemyCount.Length; i++)
         {
-            // GameObject clone = Instantiate(enemyPrefab);
+            int spawnEnemyCount = 0;
 
-            // 웨이브에 등장하는 적 중 하나를 랜덤으로 선택, 적 오브젝트 생성
-            int enemyIndex = Random.Range(0, currentWave.enemyPrefabs.Length);
-            GameObject clone = Instantiate(currentWave.enemyPrefabs[enemyIndex]);
-            Enemy enemy = clone.GetComponent<Enemy>();
+            while (spawnEnemyCount < currentWave.maxEnemyCount[i])
+            //while(true)
+            {
+                // GameObject clone = Instantiate(enemyPrefab);
 
-            enemy.Setup(this, wayPoints, gameController);
-            enemyList.Add(enemy);
+                // 웨이브에 등장하는 적 중 하나를 랜덤으로 선택, 적 오브젝트 생성
+                int enemyIndex = i;
 
-            SpawnEnemyHPSlider(clone);
 
-            spawnEnemyCount++;
 
-           
+                GameObject clone = Instantiate(currentWave.enemyPrefabs[enemyIndex]);
+                Enemy enemy = clone.GetComponent<Enemy>();
 
-            yield return new WaitForSeconds(currentWave.spawnTime);
+                enemy.Setup(this, wayPoints, gameController);
+                enemyList.Add(enemy);
+
+                SpawnEnemyHPSlider(clone);
+
+                spawnEnemyCount++;
+                yield return new WaitForSeconds(currentWave.spawnTime);
+            }
         }
+        buttonStartWave.interactable = true;
+
+        if (finalWave)
+        {
+            gameController.GameOver();
+        }
+        // Debug.Log("Loop Ended!");
+        // 
 
     }
 

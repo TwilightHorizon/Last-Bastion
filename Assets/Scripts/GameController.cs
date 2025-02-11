@@ -39,16 +39,16 @@ public class GameController : MonoBehaviour
     }
 
     public bool IsGameOver { set; get; } = false;
+    
+
 
     public void GameOver()
     {
         if (IsGameOver) return;
         IsGameOver = true;
 
-        for(int i = 0; i < enemySpawner.EnemyList.Count; i++)
-        {
-            Destroy(enemySpawner.EnemyList[i].gameObject);
-        }
+        
+        
 
 
         if(playerHP.CurrentHP == 0)
@@ -57,6 +57,12 @@ public class GameController : MonoBehaviour
             panelGameOver.SetActive(true);
             textResultScore.text = score.ToString();
             effectGameOver.Play(200, 65);
+
+            for (int i = 0; i < enemySpawner.EnemyList.Count; i++)
+            {
+                Destroy(enemySpawner.EnemyList[i].gameObject);
+            }
+
         }
         else
         {
