@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI textResultScore;
 
+    [SerializeField]
+    private DailyRankRegister dailyBestScore;
 
     
     [SerializeField]
@@ -50,8 +52,7 @@ public class GameController : MonoBehaviour
         
         
 
-
-        if(playerHP.CurrentHP == 0)
+        if(playerHP.CurrentHP <= 0)
         {
 
             panelGameOver.SetActive(true);
@@ -72,7 +73,9 @@ public class GameController : MonoBehaviour
         }
 
 
-        BackendGameData.Instance.UserGameData.experience += 125; // TODO
+        dailyBestScore.Process(score);
+
+        BackendGameData.Instance.UserGameData.experience += 35; // TODO: make increment changed based on CurrentScore or map
         if(BackendGameData.Instance.UserGameData.experience >= 100)
         {
             BackendGameData.Instance.UserGameData.experience = BackendGameData.Instance.UserGameData.experience - 100;

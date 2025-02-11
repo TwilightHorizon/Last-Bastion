@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -105,13 +106,29 @@ public class EnemySpawner : MonoBehaviour
 
         if (finalWave)
         {
-            gameController.GameOver();
+            StartCoroutine(WaitUntilEnemyAllDie());
         }
         // Debug.Log("Loop Ended!");
         // 
 
     }
 
+    private IEnumerator WaitUntilEnemyAllDie()
+    {
+        while (true)
+        {
+
+            if(currentEnemyCount == 0)
+            {
+                gameController.GameOver();
+                yield break;
+            }
+
+            yield return new WaitForSeconds(1.0f);
+
+
+        }
+    }
     
 
 

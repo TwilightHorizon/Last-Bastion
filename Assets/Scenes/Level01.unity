@@ -3505,6 +3505,7 @@ MonoBehaviour:
   playerHP: {fileID: 743191549}
   playerGold: {fileID: 743191551}
   gameController: {fileID: 1838760455}
+  buttonStartWave: {fileID: 611122929}
 --- !u!4 &413252167
 Transform:
   m_ObjectHideFlags: 0
@@ -3532,7 +3533,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f712a0501e0fd4e8e017c205ab1d8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 1838760455}
   waves:
   - spawnTime: 1.5
     maxEnemyCount: 0a00000005000000
@@ -3553,14 +3553,14 @@ MonoBehaviour:
     - {fileID: 3070370818181417406, guid: 0464b1323c2d230488dc2e3e48da3291, type: 3}
     - {fileID: 3070370818181417406, guid: e97f8778091536644a98887506bc6e74, type: 3}
   - spawnTime: 0.5
-    maxEnemyCount: 0f000000190000000a0000000a000000
+    maxEnemyCount: 0a000000190000000a0000000a000000
     enemyPrefabs:
     - {fileID: 3070370818181417406, guid: 5f85b00c04c06864e93644860fc15cf1, type: 3}
     - {fileID: 3070370818181417406, guid: e97f8778091536644a98887506bc6e74, type: 3}
     - {fileID: 3070370818181417406, guid: 1bb61f41d8be2814ca971a46a02e529d, type: 3}
     - {fileID: 3070370818181417406, guid: f9971a6d9a5bb8444a239564f75f332f, type: 3}
   - spawnTime: 0.5
-    maxEnemyCount: 1e000000050000000a0000000f000000
+    maxEnemyCount: 0a000000050000000a0000000f000000
     enemyPrefabs:
     - {fileID: 3070370818181417406, guid: 5f85b00c04c06864e93644860fc15cf1, type: 3}
     - {fileID: 3070370818181417406, guid: f9971a6d9a5bb8444a239564f75f332f, type: 3}
@@ -5890,7 +5890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c3a6e9ac9f9974db4423eb219fa3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGold: 2367
+  currentGold: 2000
 --- !u!1001 &744745396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12069,6 +12069,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1838760456}
   - component: {fileID: 1838760455}
+  - component: {fileID: 1838760457}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -12091,6 +12092,7 @@ MonoBehaviour:
   enemySpawner: {fileID: 413252166}
   panelGameOver: {fileID: 1866325984}
   textResultScore: {fileID: 275419410}
+  dailyBestScore: {fileID: 1838760457}
   panelStageComplete: {fileID: 1146625925}
   textVictoryResultScore: {fileID: 1184214115}
   playerHP: {fileID: 743191549}
@@ -12111,6 +12113,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1838760457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1838760454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4072cbccf30b8747b63774b381cc7d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1850246068
 GameObject:
   m_ObjectHideFlags: 0

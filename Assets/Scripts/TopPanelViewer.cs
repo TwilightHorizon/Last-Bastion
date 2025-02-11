@@ -38,7 +38,7 @@ public class TopPanelViewer : MonoBehaviour
     {
         textLevel.text = $"Lv.{BackendGameData.Instance.UserGameData.level}";
         sliderExperience.value = BackendGameData.Instance.UserGameData.experience / 100;
-        textHeart.text = $"{BackendGameData.Instance.UserGameData.heart} / 30";
+        textHeart.text = $"{BackendGameData.Instance.UserGameData.heart} / 80";
         textJewel.text = $"{BackendGameData.Instance.UserGameData.jewel}";
         textGold.text = $"{BackendGameData.Instance.UserGameData.gold}";
     }

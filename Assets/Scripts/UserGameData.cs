@@ -1,4 +1,4 @@
-[System.Serializable]
+﻿[System.Serializable]
 public class UserGameData
 {
     public int level;
@@ -7,6 +7,9 @@ public class UserGameData
     public int jewel;
     public int heart;
 
+    public int dailyBestScore;  // 일일 최고 무한모드 점수
+
+
     public void Reset()
     {
 
@@ -14,8 +17,8 @@ public class UserGameData
         experience = 0;
         gold = 0;
         jewel = 0;
-        heart = 30;
-
+        heart = 80;
+        dailyBestScore = 0;
 
     }
 }

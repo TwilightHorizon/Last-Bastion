@@ -42,7 +42,8 @@ public class BackendGameData
             { "experience", userGameData.experience},
             { "gold", userGameData.gold},
             { "jewel", userGameData.jewel },
-            { "heart", userGameData.heart }
+            { "heart", userGameData.heart },
+            { "dailyBestScore", userGameData.dailyBestScore }
         };
 
         Backend.GameData.Insert("USER_DATA", param, callback =>
@@ -83,13 +84,14 @@ public class BackendGameData
                     }
                     else
                     {
-                        gameDataRowInDate = gameDataJson[0]["inDate"].ToString();
+                        gameDataRowInDate               = gameDataJson[0]["inDate"].ToString();
 
-                        userGameData.level = int.Parse(gameDataJson[0]["level"].ToString());
-                        userGameData.experience = float.Parse(gameDataJson[0]["experience"].ToString());
-                        userGameData.gold = int.Parse(gameDataJson[0]["gold"].ToString());
-                        userGameData.jewel = int.Parse(gameDataJson[0]["jewel"].ToString());
-                        userGameData.heart = int.Parse(gameDataJson[0]["heart"].ToString());
+                        userGameData.level              = int.Parse(gameDataJson[0]["level"].ToString());
+                        userGameData.experience         = float.Parse(gameDataJson[0]["experience"].ToString());
+                        userGameData.gold               = int.Parse(gameDataJson[0]["gold"].ToString());
+                        userGameData.jewel              = int.Parse(gameDataJson[0]["jewel"].ToString());
+                        userGameData.heart              = int.Parse(gameDataJson[0]["heart"].ToString());
+                        userGameData.dailyBestScore     = int.Parse(gameDataJson[0]["dailyBestScore"].ToString()) ;
 
                         onGameDataLoadEvent?.Invoke();
 
@@ -128,7 +130,8 @@ public class BackendGameData
             { "experience", userGameData.experience},
             { "gold", userGameData.gold},
             { "jewel", userGameData.jewel},
-            { "heart", userGameData.heart}
+            { "heart", userGameData.heart},
+            { "dailyBestScore", userGameData.dailyBestScore }
         };
 
         if (string.IsNullOrEmpty(gameDataRowInDate))
