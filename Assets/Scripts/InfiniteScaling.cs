@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class InfiniteScaling : MonoBehaviour
 {
-
-    private float scale = 1f;
+    [SerializeField]
+    private float scale = 0.2f;
     private Enemy enemy;
     //private Movement2D movement2D;
     private EnemyHP enemyHP;
+    public float takeThisNumber;
 
     private void Awake()
     {
@@ -20,8 +21,8 @@ public class InfiniteScaling : MonoBehaviour
 
     private void Update()
     {
-        enemyHP.MaxHP += 50 * Time.deltaTime * scale;
-
+        takeThisNumber += Time.time * scale;
+        Debug.Log("take this number: " + takeThisNumber);
         
     }
 

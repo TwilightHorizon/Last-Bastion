@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 4900673191773082773}
   - component: {fileID: 4392690041525402664}
   - component: {fileID: -8202890658241204298}
-  - component: {fileID: -6665439730196137449}
   m_Layer: 8
   m_Name: EnemyInfinity
   m_TagString: Enemy
@@ -116,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e634f8f0bc66ddd47b5410a2305e5691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.5
+  moveSpeed: 2
   moveDirection: {x: 0, y: 0, z: 0}
 --- !u!58 &4392690041525402664
 CircleCollider2D:
@@ -166,15 +165,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 100
---- !u!114 &-6665439730196137449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3070370818181417406}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4bbd4441e77ab1e4d92080bd5456447e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  isInf: 1
+  initialMaxHP: 0

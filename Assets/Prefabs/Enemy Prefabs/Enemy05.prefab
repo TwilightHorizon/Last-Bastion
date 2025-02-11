@@ -100,8 +100,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6afb19f8d76e73a409cbd22c3cf67e3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scorePoint: 100
   enemyAttackDamage: 50
-  gold: 80
+  gold: 65
 --- !u!114 &4900673191773082773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e634f8f0bc66ddd47b5410a2305e5691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.5
+  moveSpeed: 1.5
   moveDirection: {x: 0, y: 0, z: 0}
 --- !u!58 &4392690041525402664
 CircleCollider2D:
@@ -163,4 +164,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edf8d2c7c4a00f54587f3d2ee737eafd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 600
+  maxHP: 500

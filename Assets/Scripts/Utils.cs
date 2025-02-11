@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public enum SceneNames { Intro = 0, Login, Lobby, Level01}
+public enum SceneNames { Intro = 0, Login, Lobby, Level01, Level02, Level03, Level04, Level05, Level06, Level07, Level08, Level09, Level10, Level11, Level12, LevelINF}
 public static class Utils
 {
 

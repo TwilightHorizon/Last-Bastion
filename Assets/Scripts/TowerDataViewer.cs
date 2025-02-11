@@ -64,9 +64,33 @@ public class TowerDataViewer : MonoBehaviour
 
     private void UpdateTowerData()
     {
+
+        if(currentTower.WeaponType == WeaponType.Cannon || currentTower.WeaponType == WeaponType.Laser)
+        {
+            imageTower.rectTransform.sizeDelta = new Vector2(88, 59);
+            textDamage.text = "Dmg: " + currentTower.AttackDamage + " + " + "<color=green>" + currentTower.AddedDamage.ToString("F1") + "</color>";
+            textAttackRate.text = "Fire Rate: " + currentTower.AttackRate;
+        }
+        else
+        {
+            imageTower.rectTransform.sizeDelta = new Vector2(59, 59);
+            if(currentTower.WeaponType == WeaponType.Slow)
+            {
+                textDamage.text = "Slow: " + currentTower.Slow * 100 + "%";
+
+            }
+            else if(currentTower.WeaponType == WeaponType.Buff)
+            {
+                textDamage.text = "Buff: " + currentTower.Buff * 100 + "%"; 
+            }
+
+
+            textAttackRate.text = "Fire Rate: -";
+        }
+
+
         imageTower.sprite = currentTower.TowerSprite;
-        textDamage.text = "Damage: " + currentTower.AttackDamage;
-        textAttackRate.text = "Fire Rate: " + currentTower.AttackRate;
+        //textAttackRate.text = "Fire Rate: " + currentTower.AttackRate;
         textAttackRange.text = "Range: " + currentTower.AttackRange;
         textLevel.text = "Level: " + currentTower.Level;
 

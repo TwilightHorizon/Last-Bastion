@@ -43,12 +43,12 @@ public class ObjectDetector : MonoBehaviour
                 hitTransform = hit.transform;
                 if (hit.collider.tag == "Tile")
                 {
-                    // Debug.Log("타일 클릭");
+                    //Debug.Log("타일 클릭");
                     towerSpawner.SpawnTower(hit.transform);
                 }
                 else if (hit.collider.tag == "Tower")
                 {
-                    // Debug.Log("타워 클릭");
+                    //Debug.Log("타워 클릭");
                     towerDataViewer.OnPanel(hit.transform);
                 }
                 // hope this works LOL

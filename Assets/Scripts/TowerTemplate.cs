@@ -13,6 +13,8 @@ public class TowerTemplate : ScriptableObject
     {
         public Sprite sprite;
         public float damage;
+        public float slow; // 0.2 ~ 20% slow
+        public float buff; // 0.2 => atk x 1.2
         public float attackRate;
         public float attackRange;
         public int cost;
