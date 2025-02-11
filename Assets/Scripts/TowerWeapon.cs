@@ -209,6 +209,7 @@ public class TowerWeapon : MonoBehaviour
         float closestDistSqr = Mathf.Infinity;
         for (int i = 0; i < enemySpawner.EnemyList.Count; ++i)
         {
+            if (enemySpawner.EnemyList[i] == null) continue;
             float distance = Vector3.Distance(enemySpawner.EnemyList[i].transform.position, transform.position);
             if (distance <= towerTemplate.weapon[level].attackRange && distance <= closestDistSqr)
             {

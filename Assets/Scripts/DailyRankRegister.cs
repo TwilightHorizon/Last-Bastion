@@ -94,7 +94,8 @@ public class DailyRankRegister : MonoBehaviour
             }
             else
             {
-                if (callback.GetMessage().Contains("userBestScore")) //자신의 랭킹 정보가 존재하지 않을때 걍 현재 점수를 새로운 랭킹으로 등록
+                Debug.Log("userRank: " + callback.GetMessage());
+                if (callback.GetMessage().Contains("userRank")) //자신의 랭킹 정보가 존재하지 않을때 걍 현재 점수를 새로운 랭킹으로 등록
                 {
                     UpdateMyRankData( newScore );
                 }
