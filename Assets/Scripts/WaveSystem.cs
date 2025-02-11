@@ -6,8 +6,7 @@ using UnityEngine;
 public class WaveSystem : MonoBehaviour
 {
 
-    [SerializeField]
-    private GameController gameController;
+    
 
     [SerializeField]
     private Wave[] waves;
