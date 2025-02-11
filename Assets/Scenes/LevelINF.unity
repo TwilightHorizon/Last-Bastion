@@ -3507,6 +3507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbd4441e77ab1e4d92080bd5456447e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scale: 2
   takeThisNumber: 0
 --- !u!1001 &414053624
 PrefabInstance:
@@ -13332,7 +13333,7 @@ GameObject:
   - component: {fileID: 1838760457}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13349,6 +13350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b92bdd8825b6e44fa2bc1273572d62a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInfinite: 1
   enemySpawner: {fileID: 413252166}
   panelGameOver: {fileID: 1866325984}
   textResultScore: {fileID: 275419410}

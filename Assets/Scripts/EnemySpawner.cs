@@ -17,6 +17,7 @@ public class EnemySpawner : MonoBehaviour
     //private float spawnTime;
     [SerializeField]
     private Transform[] wayPoints;
+    private InfiniteScaling infScaling;
 
 
     [Header("Enemy HP Slider")]
@@ -52,6 +53,7 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         enemyList  = new List<Enemy>();
+        infScaling = GetComponent<InfiniteScaling>();   
         // StartCoroutine(SpawnEnemy());
     }
 
@@ -59,6 +61,7 @@ public class EnemySpawner : MonoBehaviour
     {
         finalWave = lastWave;
         currentWave = wave;
+        // infScaling.takeThisNumber = 0;
         for (int i = 0; i < currentWave.maxEnemyCount.Length; i++) 
         {
             currentEnemyCount += currentWave.maxEnemyCount[i];
@@ -91,10 +94,15 @@ public class EnemySpawner : MonoBehaviour
 
 
                 GameObject clone = Instantiate(currentWave.enemyPrefabs[enemyIndex]);
+                
                 Enemy enemy = clone.GetComponent<Enemy>();
+                EnemyHP enemyHP = clone.GetComponent<EnemyHP>();
+                
+
 
                 enemy.Setup(this, wayPoints, gameController);
                 enemyList.Add(enemy);
+                
 
                 SpawnEnemyHPSlider(clone);
 

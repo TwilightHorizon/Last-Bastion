@@ -5,7 +5,7 @@ using UnityEngine;
 public class InfiniteScaling : MonoBehaviour
 {
     [SerializeField]
-    private float scale = 0.2f;
+    private float scale = 0.02f;
     private Enemy enemy;
     //private Movement2D movement2D;
     private EnemyHP enemyHP;
@@ -21,8 +21,8 @@ public class InfiniteScaling : MonoBehaviour
 
     private void Update()
     {
-        takeThisNumber += Time.time * scale;
-        Debug.Log("take this number: " + takeThisNumber);
+        takeThisNumber += Time.deltaTime * scale;
+        // Debug.Log("take this number: " + takeThisNumber);
         
     }
 

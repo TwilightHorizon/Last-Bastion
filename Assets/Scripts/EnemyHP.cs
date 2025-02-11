@@ -29,21 +29,26 @@ public class EnemyHP : MonoBehaviour
         get => maxHP;
     }
     public float CurrentHP => currentHP;
+    public float scaling = 0f;
 
+    private GameObject[] gameController;
 
     private void Awake()
     {
         if (isInf){
-            // infScaling = GetComponent<InfiniteScaling>();
 
-            maxHP += infScaling.takeThisNumber;
+            gameController = GameObject.FindGameObjectsWithTag("GameController");
+            // infScaling = GetComponent<InfiniteScaling>();
+            // Debug.Log(scaling);
+            maxHP += gameController[0].GetComponent<GameController>().Score / 20f;
+            // Debug.Log(gameController[0].GetComponent<GameController>().Score);
         }
 
 
 
         currentHP = maxHP;
         initialMaxHP = maxHP;
-        Debug.Log(currentHP);
+        //Debug.Log(currentHP);
 
         enemy = GetComponent<Enemy>();
         
