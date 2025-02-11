@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour
     private DailyRankRegister dailyBestScore;
 
     
+
+    
     [SerializeField]
     private GameObject panelStageComplete;
     [SerializeField]
@@ -33,6 +35,10 @@ public class GameController : MonoBehaviour
     private ScaleEffect effectGameOver;
     [SerializeField]
     private ScaleEffect effectVictory;
+
+    [Header("Stage Number")]
+    [SerializeField]
+    private int stageNumber;
 
     public int Score
     {
@@ -75,10 +81,10 @@ public class GameController : MonoBehaviour
 
         dailyBestScore.Process(score);
 
-        BackendGameData.Instance.UserGameData.experience += 35; // TODO: make increment changed based on CurrentScore or map
-        if(BackendGameData.Instance.UserGameData.experience >= 100)
+        BackendGameData.Instance.UserGameData.experience += 25*stageNumber; // TODO: make increment changed based on CurrentScore or map
+        if(BackendGameData.Instance.UserGameData.experience >= 100*(BackendGameData.Instance.UserGameData.level/2) + 100)
         {
-            BackendGameData.Instance.UserGameData.experience = BackendGameData.Instance.UserGameData.experience - 100;
+            BackendGameData.Instance.UserGameData.experience = 0;
             BackendGameData.Instance.UserGameData.level++;
         }
 

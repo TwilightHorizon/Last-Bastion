@@ -3560,7 +3560,7 @@ MonoBehaviour:
     - {fileID: 3070370818181417406, guid: 1bb61f41d8be2814ca971a46a02e529d, type: 3}
     - {fileID: 3070370818181417406, guid: f9971a6d9a5bb8444a239564f75f332f, type: 3}
   - spawnTime: 0.25
-    maxEnemyCount: 1e000000190000000a0000001e000000
+    maxEnemyCount: 1e000000190000000a00000005000000
     enemyPrefabs:
     - {fileID: 3070370818181417406, guid: 5f85b00c04c06864e93644860fc15cf1, type: 3}
     - {fileID: 3070370818181417406, guid: f9971a6d9a5bb8444a239564f75f332f, type: 3}
@@ -12098,6 +12098,7 @@ MonoBehaviour:
   playerHP: {fileID: 743191549}
   effectGameOver: {fileID: 389700974}
   effectVictory: {fileID: 835575397}
+  stageNumber: 1
 --- !u!4 &1838760456
 Transform:
   m_ObjectHideFlags: 0

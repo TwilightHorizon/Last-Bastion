@@ -13,7 +13,7 @@ public class EnemyHP : MonoBehaviour
     private Enemy enemy;
     private SpriteRenderer spriteRenderer;
 
-    public float MaxHP => maxHP;
+    public float MaxHP { set; get; }
     public float CurrentHP => currentHP;
 
 
