@@ -5,13 +5,13 @@ STILL MAKING IT! (working one it slowly during my free time as a hobby)
 
 
 ## 🎮 About the Game
-Last Bastion is a thrilling tower defense experience that combines unique elements with a captivating storyline. Set in a world of unknown, players will embark on an adventure filled with extreme tower defense.
+Last Bastion is a thrilling tower defense experience that combines sci-fi with a captivating storyline. Set in a world of unknown, players will embark on an adventure filled with extreme tower defense.
 
 ## 🚀 Features
 - **Immersive Gameplay:** 
 - **Engaging Storyline:** 
 - **Stunning Visuals:** 
-- **Customizable Mechanics:** 
+- **Game Modes:** the game has normal campaign mode and infinite mode for more challenging experiences.
 - **Multiplayer/Singleplayer Modes:** the game is usually played on singleplayer, but this is an online game where you can friend other players and see ranking leaderboards.
 
 ## 🕹️ How to Play
