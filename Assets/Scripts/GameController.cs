@@ -86,19 +86,19 @@ public class GameController : MonoBehaviour
         {
             dailyBestScore.Process(score);
 
-            BackendGameData.Instance.UserGameData.experience += 25 * stageNumber; // TODO: make increment changed based on CurrentScore or map
-            if (BackendGameData.Instance.UserGameData.experience >= 100 * (BackendGameData.Instance.UserGameData.level / 2) + 100)
-            {
-                BackendGameData.Instance.UserGameData.experience = 0;
-                BackendGameData.Instance.UserGameData.level++;
-            }
+            
 
             // update info
 
             BackendGameData.Instance.GameDataUpdate(AfterGameOver);
         }
 
-        
+        BackendGameData.Instance.UserGameData.experience += 25 * stageNumber; // TODO: make increment changed based on CurrentScore or map
+        if (BackendGameData.Instance.UserGameData.experience >= 100 * (BackendGameData.Instance.UserGameData.level / 2) + 100)
+        {
+            BackendGameData.Instance.UserGameData.experience = 0;
+            BackendGameData.Instance.UserGameData.level++;
+        }
 
 
     }

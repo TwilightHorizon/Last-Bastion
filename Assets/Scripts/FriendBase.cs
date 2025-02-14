@@ -9,7 +9,10 @@ public class FriendBase : MonoBehaviour
 	[SerializeField]
 	private	TextMeshProUGUI	textNickname;	// 닉네임
 	[SerializeField]
-	private	TextMeshProUGUI	textTime;		// 만료시간, 접속시간 등의 시간 정보
+	public	TextMeshProUGUI	textTime;		// 만료시간, 접속시간 등의 시간 정보
+
+	
+
 
 	protected	BackendFriendSystem	backendFriendSystem;
 	protected	FriendPageBase		friendPage;

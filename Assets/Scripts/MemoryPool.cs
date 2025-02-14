@@ -21,37 +21,37 @@ public class MemoryPool
 	public	int	MaxCount	=> maxCount;	// 외부에서 현재 리스트에 등록되어 있는 오브젝트 개수 확인을 위한 프로퍼티
 	public	int	ActiveCount	=> activeCount;	// 외부에서 현재 활성화 되어 있는 오브젝트 개수 확인을 위한 프로퍼티
 
-	//public MemoryPool(GameObject poolObject, Transform poolParent=null)
-	//{
-	//	maxCount		= 0;
-	//	activeCount		= 0;
-	//	this.poolObject	= poolObject;
-	//	this.poolParent = poolParent;
+	public MemoryPool(GameObject poolObject, Transform poolParent=null)
+	{
+		maxCount		= 0;
+		activeCount		= 0;
+		this.poolObject	= poolObject;
+		this.poolParent = poolParent;
 		
-	//	poolItemList	= new List<PoolItem>();
+		poolItemList	= new List<PoolItem>();
 		
-	//	InstantiateObjects();
-	//}
+		InstantiateObjects();
+	}
 
 	/// <summary>
 	/// increaseCount 단위로 오브젝트를 생성
 	/// </summary>
-	//public void InstantiateObjects()
-	//{
-	//	maxCount += increaseCount;
+	public void InstantiateObjects()
+	{
+		maxCount += increaseCount;
 
-	//	for ( int i = 0; i < increaseCount; ++ i )
-	//	{
-	//		PoolItem poolItem = new PoolItem();
+		for ( int i = 0; i < increaseCount; ++ i )
+		{
+			PoolItem poolItem = new PoolItem();
 
-	//		poolItem.isActive = false;
-	//		poolItem.gameObject	= GameObject.Instantiate(poolObject);
-	//		poolItem.gameObject.SetActive(false);
-	//		poolItem.gameObject.transform.SetParent(poolParent);
+			poolItem.isActive = false;
+			poolItem.gameObject	= GameObject.Instantiate(poolObject);
+			poolItem.gameObject.SetActive(false);
+			poolItem.gameObject.transform.SetParent(poolParent);
 
-	//		poolItemList.Add(poolItem);
-	//	}
-	//}
+			poolItemList.Add(poolItem);
+		}
+	}
 
 	/// <summary>
 	/// 현재 관리중인(활성/비활성) 모든 오브젝트를 삭제
@@ -73,32 +73,32 @@ public class MemoryPool
 	/// poolItemList에 저장되어 있는 오브젝트를 활성화해서 사용
 	/// 현재 모든 오브젝트가 사용중이면 InstantiateObjects()로 추가 생성
 	/// </summary>
-	//public GameObject ActivatePoolItem()
-	//{
-	//	if ( poolItemList == null ) return null;
+	public GameObject ActivatePoolItem()
+	{
+		if ( poolItemList == null ) return null;
 
-	//	// 현재 생성해서 관리하는 모든 오브젝트 개수와 현재 활성화 상태인 오브젝트 개수 비교
-	//	// 모든 오브젝트가 활성화 상태이면 새로운 오브젝트 필요
-	//	if ( maxCount == activeCount ) InstantiateObjects();
+		// 현재 생성해서 관리하는 모든 오브젝트 개수와 현재 활성화 상태인 오브젝트 개수 비교
+		// 모든 오브젝트가 활성화 상태이면 새로운 오브젝트 필요
+		if ( maxCount == activeCount ) InstantiateObjects();
 
-	//	int count = poolItemList.Count;
-	//	for ( int i = 0; i < count; ++ i )
-	//	{
-	//		PoolItem poolItem = poolItemList[i];
+		int count = poolItemList.Count;
+		for ( int i = 0; i < count; ++ i )
+		{
+			PoolItem poolItem = poolItemList[i];
 
-	//		if ( poolItem.isActive == false )
-	//		{
-	//			activeCount ++;
+			if ( poolItem.isActive == false )
+			{
+				activeCount ++;
 				
-	//			poolItem.isActive = true;
-	//			poolItem.gameObject.SetActive(true);
+				poolItem.isActive = true;
+				poolItem.gameObject.SetActive(true);
 				
-	//			return poolItem.gameObject;
-	//		}
-	//	}
+				return poolItem.gameObject;
+			}
+		}
 
-	//	return null;
-	//}
+		return null;
+	}
 
 	/// <summary>
 	/// 현재 사용이 완료된 오브젝트를 비활성화 상태로 설정

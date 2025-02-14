@@ -1,170 +1,352 @@
-ï»¿using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine;
 using System;
 using BackEnd;
 
 public class BackendFriendSystem : MonoBehaviour
 {
-    [SerializeField]
-    private FriendSentRequestPage sentRequestPage;
+	[SerializeField]
+	private	FriendSentRequestPage		sentRequestPage;
+	[SerializeField]
+	private	FriendReceivedRequestPage	receivedRequestPage;
+	[SerializeField]
+	private	FriendPage					friendPage;
 
-    private string GetUserInfoBy(string nickname)
-    {
-        var bro = Backend.Social.GetUserInfoByNickName(nickname);
-        string inDate = string.Empty;
+	private string GetUserInfoBy(string nickname)
+	{
+		// ÇØ´ç ´Ð³×ÀÓ(nickname)ÀÇ À¯Àú°¡ Á¸ÀçÇÏ´ÂÁö ¿©ºÎ´Â µ¿±â·Î ÁøÇà
+		var		bro		= Backend.Social.GetUserInfoByNickName(nickname);
+		string	inDate	= string.Empty;
+		
+		if ( !bro.IsSuccess() )
+		{
+			Debug.LogError($"À¯Àú °Ë»ö µµÁß ¿¡·¯°¡ ¹ß»ýÇß½À´Ï´Ù. : {bro}");
+			return inDate;
+		}
 
-        if (!bro.IsSuccess())
-        {
-            Debug.LogError($" : {bro}");
-            return inDate;
-        }
+		// JSON µ¥ÀÌÅÍ ÆÄ½Ì ¼º°ø
+		try
+		{
+			LitJson.JsonData jsonData = bro.GetFlattenJSON()["row"];
 
-        try
-        {
-            LitJson.JsonData jsonData = bro.GetFlattenJSON()["row"];
+			// ¹Þ¾Æ¿Â µ¥ÀÌÅÍÀÇ °³¼ö°¡ 0ÀÌ¸é µ¥ÀÌÅÍ°¡ ¾ø´Â °Í
+			if ( jsonData.Count <= 0 )
+			{
+				Debug.LogWarning("À¯ÀúÀÇ inDate µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.");
+				return inDate;
+			}
 
-            if (jsonData.Count <= 0)
-            {
-                Debug.LogWarning(" inDate  .");
-                return inDate;
-            }
+			inDate = jsonData["inDate"].ToString();
 
-            inDate = jsonData["inDate"].ToString();
+			Debug.Log($"{nickname}ÀÇ inDate °ªÀº {inDate} ÀÔ´Ï´Ù.");
+		}
+		// JSON µ¥ÀÌÅÍ ÆÄ½Ì ½ÇÆÐ
+		catch ( Exception e )
+		{
+			// try-catch ¿¡·¯ Ãâ·Â
+			Debug.LogError(e);
+		}
 
-            Debug.Log($"{nickname}ï¿½ï¿½ inDate ï¿½ï¿½ï¿½ï¿½ {inDate} ï¿½Ô´Ï´ï¿½.");
-        }
-        // JSON ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä½ï¿½ ï¿½ï¿½ï¿½ï¿½
-        catch (Exception e)
-        {
-            // try-catch ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
-            Debug.LogError(e);
-        }
+		return inDate;
+	}
 
-        return inDate;
-    }
+	public void SendRequestFriend(string nickname)
+	{
+		// RequestFriend() ¸Þ¼Òµå¸¦ ÀÌ¿ëÇØ Ä£±¸ Ãß°¡ ¿äÃ»À» ÇÒ ¶§ ÇØ´ç Ä£±¸ÀÇ inDate Á¤º¸°¡ ÇÊ¿ä
+		string inDate = GetUserInfoBy(nickname);
 
-    public void SendRequestFriend(string nickname)
-    {
-        // RequestFriend() ï¿½Þ¼Òµå¸¦ ï¿½Ì¿ï¿½ï¿½ï¿½ Ä£ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ø´ï¿½ Ä£ï¿½ï¿½ï¿½ï¿½ inDate ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½
-        string inDate = GetUserInfoBy(nickname);
+		// inDate Á¤º¸¸¦ °¡Áø À¯Àú¿¡°Ô "Ä£±¸ ¿äÃ»"À» º¸³½´Ù.
+		Backend.Friend.RequestFriend(inDate, callback =>
+		{
+			if ( !callback.IsSuccess() )
+			{
+				Debug.LogError($"{nickname} Ä£±¸ ¿äÃ» µµÁß ¿¡·¯°¡ ¹ß»ýÇß½À´Ï´Ù. : {callback}");
+				return;
+			}
 
-        // inDate ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ "Ä£ï¿½ï¿½ ï¿½ï¿½Ã»"ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
-        Backend.Friend.RequestFriend(inDate, callback =>
-        {
-            if (!callback.IsSuccess())
-            {
-                Debug.LogError($"{nickname} Ä£ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½. : {callback}");
-                return;
-            }
+			Debug.Log($"Ä£±¸ ¿äÃ»¿¡ ¼º°øÇß½À´Ï´Ù. : {callback}");
 
-            Debug.Log($"Ä£ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½. : {callback}");
+			// Ä£±¸ ¿äÃ»¿¡ ¼º°øÇÏ¸é Ä£±¸ ¿äÃ» ´ë±â ¸ñ·Ï ºÒ·¯¿À±â
+			GetSentRequestList();
+		});
+	}
 
-            // Ä£ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ Ä£ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
-            GetSentRequestList();
-        });
-    }
+	public void GetSentRequestList()
+	{
+		Backend.Friend.GetSentRequestList(callback =>
+		{
+			if ( !callback.IsSuccess() )
+			{
+				Debug.LogError($"Ä£±¸ ¿äÃ» ´ë±â ¸ñ·Ï Á¶È¸ µµÁß ¿¡·¯°¡ ¹ß»ýÇß½À´Ï´Ù. : {callback}");
+				return;
+			}
 
-    public void GetSentRequestList()
-    {
-        Backend.Friend.GetSentRequestList(callback =>
-        {
-            if (!callback.IsSuccess())
-            {
-                Debug.LogError($"Ä£ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½È¸ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½. : {callback}");
-                return;
-            }
+			// JSON µ¥ÀÌÅÍ ÆÄ½Ì ¼º°ø
+			try
+			{
+				LitJson.JsonData jsonData = callback.GetFlattenJSON()["rows"];
 
-            // JSON ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä½ï¿½ ï¿½ï¿½ï¿½ï¿½
-            try
-            {
-                LitJson.JsonData jsonData = callback.GetFlattenJSON()["rows"];
+				// ¹Þ¾Æ¿Â µ¥ÀÌÅÍÀÇ °³¼ö°¡ 0ÀÌ¸é µ¥ÀÌÅÍ°¡ ¾ø´Â °Í
+				if ( jsonData.Count <= 0 )
+				{
+					Debug.LogWarning("Ä£±¸ ¿äÃ» ´ë±â ¸ñ·Ï µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.");
+					return;
+				}
 
-                // ï¿½Þ¾Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
-                if (jsonData.Count <= 0)
-                {
-                    Debug.LogWarning("Ä£ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.");
-                    return;
-                }
+				// Ä£±¸ ¿äÃ» ´ë±â ¸ñ·Ï¿¡ ÀÖ´Â ¸ðµç UI ºñÈ°¼ºÈ­
+				sentRequestPage.DeactivateAll();
 
-                // Ä£ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ ï¿½ï¿½Ï¿ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ UI ï¿½ï¿½È°ï¿½ï¿½È­
-                // sentRequestPage.DeactivateAll();
+				foreach ( LitJson.JsonData item in jsonData )
+				{
+					FriendData friendData	= new FriendData();
 
-                foreach (LitJson.JsonData item in jsonData)
-                {
-                    FriendData friendData = new FriendData();
+					//friend.nickname		= item.ContainsKey("nickname") == true ? item["nickname"].ToString() : "NONAME";
+					friendData.nickname		= item["nickname"].ToString().Equals("True") ? "NONAME" : item["nickname"].ToString();
+					friendData.inDate		= item["inDate"].ToString();
+					friendData.createdAt	= item["createdAt"].ToString();
 
-                    //friend.nickname		= item.ContainsKey("nickname") == true ? item["nickname"].ToString() : "NONAME";
-                    friendData.nickname = item["nickname"].ToString().Equals("True") ? "NONAME" : item["nickname"].ToString();
-                    friendData.inDate = item["inDate"].ToString();
-                    friendData.createdAt = item["createdAt"].ToString();
+					// [Ä£±¸ ¿äÃ»]À» º¸³½ ½Ã°£À¸·ÎºÎÅÍ ÀÏÁ¤ ±â°£ÀÌ Áö³µ´Ù¸é ÀÚµ¿À¸·Î Ä£±¸ ¿äÃ» Ãë¼Ò
+					if ( IsExpirationDate(friendData.createdAt) )
+					{
+						RevokeSentRequest(friendData.inDate);
+						continue;
+					}
 
-                    // [Ä£ï¿½ï¿½ ï¿½ï¿½Ã»]ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½â°£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ù¸ï¿½ ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ Ä£ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½ï¿½ï¿½
-                    if (IsExpirationDate(friendData.createdAt))
-                    {
-                        RevokeSentRequest(friendData.inDate);
-                        continue;
-                    }
+					// ÇöÀç friend Á¤º¸¸¦ ¹ÙÅÁÀ¸·Î Ä£±¸ ¿äÃ» ´ë±â UI È°¼ºÈ­
+					sentRequestPage.Activate(friendData);
+				}
+			}
+			// JSON µ¥ÀÌÅÍ ÆÄ½Ì ½ÇÆÐ
+			catch ( Exception e )
+			{
+				// try-catch ¿¡·¯ Ãâ·Â
+				Debug.LogError(e);
+			}
+		});
+	}
 
-                    // ï¿½ï¿½ï¿½ï¿½ friend ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ä£ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ UI È°ï¿½ï¿½È­
-                    sentRequestPage.Activate(friendData);
-                }
-            }
-            // JSON ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä½ï¿½ ï¿½ï¿½ï¿½ï¿½
-            catch (Exception e)
-            {
-                // try-catch ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
-                Debug.LogError(e);
-            }
-        });
-    }
+	public void RevokeSentRequest(string inDate)
+	{
+		Backend.Friend.RevokeSentRequest(inDate, callback =>
+		{
+			if ( !callback.IsSuccess() )
+			{
+				Debug.LogError($"Ä£±¸ ¿äÃ» Ãë¼Ò µµÁß ¿¡·¯°¡ ¹ß»ýÇß½À´Ï´Ù. : {callback}");
+				return;
+			}
+			
+			Debug.Log($"Ä£±¸ ¿äÃ» Ãë¼Ò¿¡ ¼º°øÇß½À´Ï´Ù. : {callback}");
+		});
+	}
 
-    public void RevokeSentRequest(string inDate)
-    {
-        Backend.Friend.RevokeSentRequest(inDate, callback =>
-        {
-            if (!callback.IsSuccess())
-            {
-                Debug.LogError($"Ä£ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½. : {callback}");
-                return;
-            }
+	public void GetReceivedRequestList()
+	{
+		Backend.Friend.GetReceivedRequestList(callback =>
+		{
+			if ( !callback.IsSuccess() )
+			{
+				Debug.LogError($"Ä£±¸ ¼ö¶ô ´ë±â ¸ñ·Ï Á¶È¸ µµÁß ¿¡·¯°¡ ¹ß»ýÇß½À´Ï´Ù. : {callback}");
+				return;
+			}
 
-            Debug.Log($"Ä£ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½ï¿½Ò¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½. : {callback}");
-        });
-    }
+			// JSON µ¥ÀÌÅÍ ÆÄ½Ì ¼º°ø
+			try
+			{
+				LitJson.JsonData jsonData = callback.GetFlattenJSON()["rows"];
 
-    private bool IsExpirationDate(string createdAt)
-    {
-        // GetServerTime() - ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½
-        var bro = Backend.Utils.GetServerTime();
+				// ¹Þ¾Æ¿Â µ¥ÀÌÅÍÀÇ °³¼ö°¡ 0ÀÌ¸é µ¥ÀÌÅÍ°¡ ¾ø´Â °Í
+				if ( jsonData.Count <= 0 )
+				{
+					Debug.LogWarning("Ä£±¸ ¼ö¶ô ´ë±â ¸ñ·Ï µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.");
+					return;
+				}
 
-        if (!bro.IsSuccess())
-        {
-            Debug.LogError($"ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ï¿½ß½ï¿½ï¿½Ï´ï¿½. : {bro}");
-            return false;
-        }
+				// Ä£±¸ ¼ö¶ô ´ë±â ¸ñ·Ï¿¡ ÀÖ´Â ¸ðµç UI ºñÈ°¼ºÈ­
+				receivedRequestPage.DeactivateAll();
 
-        // JSON ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä½ï¿½ ï¿½ï¿½ï¿½ï¿½
-        try
-        {
-            // createdAt ï¿½Ã°ï¿½ï¿½ï¿½ï¿½Îºï¿½ï¿½ï¿½ 3ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
-            DateTime after3Days = DateTime.Parse(createdAt).AddDays(Constants.EXPIRATION_DAYS);
-            // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
-            string serverTime = bro.GetFlattenJSON()["utcTime"].ToString();
-            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ = ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ - ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
-            TimeSpan timeSpan = after3Days - DateTime.Parse(serverTime);
+				foreach ( LitJson.JsonData item in jsonData )
+				{
+					FriendData friendData	= new FriendData();
 
-            if (timeSpan.TotalHours < 0)
-            {
-                return true;
-            }
-        }
-        // JSON ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä½ï¿½ ï¿½ï¿½ï¿½ï¿½
-        catch (Exception e)
-        {
-            // try-catch ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
-            Debug.LogError(e);
-        }
+					friendData.nickname		= item["nickname"].ToString().Equals("True") ? "NONAME" : item["nickname"].ToString();
+					friendData.inDate		= item["inDate"].ToString();
+					friendData.createdAt	= item["createdAt"].ToString();
 
-        return false;
-    }
+					// Ä£±¸ ¿äÃ»À» ¹ÞÀºÁö 3ÀÏÀÌ Áö³µ´Ù¸é ÀÚµ¿À¸·Î Ä£±¸ °ÅÀý
+					if ( IsExpirationDate(friendData.createdAt) )
+					{
+						RejectFriend(friendData);
+						continue;
+					}
+
+					// ÇöÀç friendData Á¤º¸¸¦ ¹ÙÅÁÀ¸·Î Ä£±¸ ¼ö¶ô ´ë±â UI È°¼ºÈ­
+					receivedRequestPage.Activate(friendData);
+				}
+			}
+			// JSON µ¥ÀÌÅÍ ÆÄ½Ì ½ÇÆÐ
+			catch ( Exception e )
+			{
+				// try-catch ¿¡·¯ Ãâ·Â
+				Debug.LogError(e);
+			}
+		});
+	}
+
+	public void AcceptFriend(FriendData friendData)
+	{
+		Backend.Friend.AcceptFriend(friendData.inDate, callback =>
+		{
+			if ( !callback.IsSuccess() )
+			{
+				Debug.LogError($"Ä£±¸ ¼ö¶ô Áß ¿¡·¯°¡ ¹ß»ýÇß½À´Ï´Ù. : {callback}");
+				return;
+			}
+
+			Debug.Log($"{friendData.nickname}ÀÌ(°¡) Ä£±¸°¡ µÇ¾ú½À´Ï´Ù. : {callback}");
+		});
+	}
+
+	public void RejectFriend(FriendData friendData)
+	{
+		Backend.Friend.RejectFriend(friendData.inDate, callback =>
+		{
+			if ( !callback.IsSuccess() )
+			{
+				Debug.LogError($"Ä£±¸ °ÅÀý Áß ¿¡·¯°¡ ¹ß»ýÇß½À´Ï´Ù. : {callback}");
+				return;
+			}
+
+			Debug.Log($"{friendData.nickname}ÀÇ Ä£±¸ ¿äÃ»À» °ÅÀýÇß½À´Ï´Ù. : {callback}");
+		});
+	}
+
+	public void GetFriendList()
+	{
+		Backend.Friend.GetFriendList(callback =>
+		{
+			if ( !callback.IsSuccess() )
+			{
+				Debug.LogError($"Ä£±¸ ¸ñ·Ï Á¶È¸ µµÁß ¿¡·¯°¡ ¹ß»ýÇß½À´Ï´Ù. : {callback}");
+				return;
+			}
+
+			// JSON µ¥ÀÌÅÍ ÆÄ½Ì ¼º°ø
+			try
+			{
+				LitJson.JsonData jsonData = callback.GetFlattenJSON()["rows"];
+
+				// ¹Þ¾Æ¿Â µ¥ÀÌÅÍÀÇ °³¼ö°¡ 0ÀÌ¸é µ¥ÀÌÅÍ°¡ ¾ø´Â °Í
+				if ( jsonData.Count <= 0 )
+				{
+					Debug.LogWarning("Ä£±¸ ¸ñ·Ï µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.");
+					return;
+				}
+
+				// Ä£±¸ ¸ñ·Ï¿¡ ÀÖ´Â ¸ðµç UI ºñÈ°¼ºÈ­
+				friendPage.DeactivateAll();
+
+				List<TransactionValue>	transactionList	= new List<TransactionValue>();
+				List<FriendData>		friendDataList	= new List<FriendData>();
+
+				foreach ( LitJson.JsonData item in jsonData )
+				{
+					FriendData friendData	= new FriendData();
+
+					friendData.nickname		= item["nickname"].ToString().Equals("True") ? "NONAME" : item["nickname"].ToString();
+					friendData.inDate		= item["inDate"].ToString();
+					friendData.createdAt	= item["createdAt"].ToString();
+					friendData.lastLogin	= item["lastLogin"].ToString();
+
+					friendDataList.Add(friendData);
+
+					// friendData.inDate¸¦ °¡Áö´Â Ä£±¸ÀÇ UserGameData Á¤º¸ ºÒ·¯¿À±â
+					Where where = new Where();
+					where.Equal("owner_inDate", friendData.inDate);
+					transactionList.Add(TransactionValue.SetGet(Constants.USER_DATA_TABLE, where));
+				}
+
+				Backend.GameData.TransactionReadV2(transactionList, callback =>
+				{
+					if ( !callback.IsSuccess() )
+					{
+						Debug.LogError($"Transaction Error : {callback}");
+						return;
+					}
+
+					LitJson.JsonData userData = callback.GetFlattenJSON()["Responses"];
+
+					if ( userData.Count <= 0 )
+					{
+						Debug.LogWarning($"µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+						return;
+					}
+
+					for ( int i = 0; i < userData.Count; ++ i )
+					{
+						// Ä£±¸ ·¹º§ Á¤º¸ ¼³Á¤
+						friendDataList[i].level = $"Lv. {userData[i]["level"]}";
+						// ÇöÀç friendDataList[i] Á¤º¸¸¦ ¹ÙÅÁÀ¸·Î Ä£±¸ UI È°¼ºÈ­
+						friendPage.Activate(friendDataList[i]);
+					}
+				});
+			}
+			// JSON µ¥ÀÌÅÍ ÆÄ½Ì ½ÇÆÐ
+			catch ( Exception e )
+			{
+				// try-catch ¿¡·¯ Ãâ·Â
+				Debug.LogError(e);
+			}
+		});
+	}
+
+	public void BreakFriend(FriendData friendData)
+	{
+		Backend.Friend.BreakFriend(friendData.inDate, callback =>
+		{
+			if ( !callback.IsSuccess() )
+			{
+				Debug.LogError($"Ä£±¸ »èÁ¦ Áß ¿¡·¯°¡ ¹ß»ýÇß½À´Ï´Ù. : {callback}");
+				return;
+			}
+
+			Debug.Log($"{friendData.nickname}¿Í(°ú) Ä£±¸°¡ ÇØÁ¦µÇ¾ú½À´Ï´Ù. : {callback}");
+		});
+	}
+
+	private bool IsExpirationDate(string createdAt)
+	{
+		// GetServerTime() - ¼­¹ö ½Ã°£ ºÒ·¯¿À±â
+		var bro = Backend.Utils.GetServerTime();
+
+		if ( !bro.IsSuccess() )
+		{
+			Debug.LogError($"¼­¹ö ½Ã°£ ºÒ·¯¿À±â¿¡ ½ÇÆÐÇß½À´Ï´Ù. : {bro}");
+			return false;
+		}
+
+		// JSON µ¥ÀÌÅÍ ÆÄ½Ì ¼º°ø
+		try
+		{
+			// createdAt ½Ã°£À¸·ÎºÎÅÍ 3ÀÏ µÚÀÇ ½Ã°£
+			DateTime after3Days = DateTime.Parse(createdAt).AddDays(Constants.EXPIRATION_DAYS);
+			// ÇöÀç ¼­¹ö ½Ã°£
+			string serverTime = bro.GetFlattenJSON()["utcTime"].ToString();
+			// ¸¸·á±îÁö ³²Àº ½Ã°£ = ¸¸·á ½Ã°£ - ÇöÀç ¼­¹ö ½Ã°£
+			TimeSpan timeSpan = after3Days - DateTime.Parse(serverTime);
+
+			if ( timeSpan.TotalHours < 0 )
+			{
+				return true;
+			}
+		}
+		// JSON µ¥ÀÌÅÍ ÆÄ½Ì ½ÇÆÐ
+		catch ( Exception e )
+		{
+			// try-catch ¿¡·¯ Ãâ·Â
+			Debug.LogError(e);
+		}
+
+		return false;
+	}
 }
 

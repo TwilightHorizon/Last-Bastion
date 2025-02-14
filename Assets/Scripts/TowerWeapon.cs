@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum WeaponType { Cannon = 0, Laser, Slow, Buff, Fire}
-public enum WeaponState {SearchTarget = 0, TryAttackCannon, TryAttackLaser}
+public enum WeaponType { Cannon = 0, Laser, Slow, Buff, Money, Area}
+public enum WeaponState {SearchTarget = 0, TryAttackCannon, TryAttackLaser, GenerateMoney, TryAttackArea}
 
 public class TowerWeapon : MonoBehaviour
 {
@@ -37,6 +37,9 @@ public class TowerWeapon : MonoBehaviour
     [SerializeField]
     private LayerMask targetLayer;
 
+    [Header("Area")]
+    [SerializeField]
+    private GameObject areaBombPrefab;
 
 
     private WeaponState weaponState = WeaponState.SearchTarget;
@@ -56,7 +59,9 @@ public class TowerWeapon : MonoBehaviour
     public float AttackRange => towerTemplate.weapon[level].attackRange;
     public float Slow => towerTemplate.weapon[level].slow;
     public float Buff => towerTemplate.weapon[level].buff;
-
+    public float Earning => towerTemplate.weapon[level].earning;
+    public float AreaDamage => towerTemplate.weapon[level].areaDamage;
+    public float AreaOfImpact => towerTemplate.weapon[level].areaOfImpact;
     public WeaponType WeaponType => weaponType;
 
     private SpriteRenderer spriteRenderer;
@@ -90,7 +95,9 @@ public class TowerWeapon : MonoBehaviour
         this.playerGold = playerGold;
         // 최초 상태를 WeaponState.SearchTarget으로 설정
 
-        if(weaponType == WeaponType.Cannon || weaponType == WeaponType.Laser)
+        if (weaponType == WeaponType.Money) ChangeState(WeaponState.GenerateMoney);
+
+        if(weaponType == WeaponType.Cannon || weaponType == WeaponType.Laser || weaponType == WeaponType.Area)
         {
             ChangeState(WeaponState.SearchTarget);
 
@@ -117,7 +124,7 @@ public class TowerWeapon : MonoBehaviour
 
             if(Vector3.Distance(weapon.transform.position, transform.position) <= towerTemplate.weapon[level].attackRange)
             {
-                if(weapon.WeaponType == WeaponType.Cannon || weapon.WeaponType == WeaponType.Laser)
+                if(weapon.WeaponType == WeaponType.Cannon || weapon.WeaponType == WeaponType.Laser || weapon.WeaponType == WeaponType.Area)
                 {
                     weapon.AddedDamage = weapon.AttackDamage * (towerTemplate.weapon[level].buff);
                     weapon.BuffLevel = Level;
@@ -141,7 +148,7 @@ public class TowerWeapon : MonoBehaviour
 
             if (Vector3.Distance(weapon.transform.position, transform.position) <= towerTemplate.weapon[level].attackRange)
             {
-                if (weapon.WeaponType == WeaponType.Cannon || weapon.WeaponType == WeaponType.Laser)
+                if (weapon.WeaponType == WeaponType.Cannon || weapon.WeaponType == WeaponType.Laser || weapon.WeaponType == WeaponType.Area)
                 {
                     weapon.AddedDamage = 0;
                     weapon.BuffLevel = 0;
@@ -150,7 +157,15 @@ public class TowerWeapon : MonoBehaviour
         }
     }
 
-
+    private IEnumerator GenerateMoney()
+    {
+        // Debug.Log("Hello");
+        while (true)
+        {
+            playerGold.CurrentGold += Mathf.RoundToInt(Earning);
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
 
     public void ChangeState(WeaponState newState)
     {
@@ -211,6 +226,10 @@ public class TowerWeapon : MonoBehaviour
                 else if(weaponType == WeaponType.Laser)
                 {
                     ChangeState(WeaponState.TryAttackLaser);
+                }
+                else if(weaponType == WeaponType.Area)
+                {
+                    ChangeState(WeaponState.TryAttackArea);
                 }
 
             }
@@ -281,6 +300,24 @@ public class TowerWeapon : MonoBehaviour
         }
     }
 
+    private IEnumerator TryAttackArea()
+    {
+        while (true)
+        {
+            if (!IsPossibleToAttackTarget())
+            {
+                ChangeState(WeaponState.SearchTarget);
+                break;
+            }
+
+
+            yield return new WaitForSeconds(towerTemplate.weapon[level].attackRate);
+            SpawnBomb();
+        }
+        // yield return null;
+    }
+
+
     private Transform FindClosestAttackTarget()
     {
         float closestDistSqr = Mathf.Infinity;
@@ -296,6 +333,13 @@ public class TowerWeapon : MonoBehaviour
         }
 
         return attackTarget;
+    }
+
+    private void SpawnBomb()
+    {
+        GameObject clone = Instantiate(areaBombPrefab, spawnPoint.position, Quaternion.identity);
+        float damage = towerTemplate.weapon[level].areaDamage + AddedDamage;
+        clone.GetComponent<Bomb>().Setup(attackTarget, damage, towerTemplate.weapon[level].areaOfImpact);
     }
 
     private void SpawnProjectile()

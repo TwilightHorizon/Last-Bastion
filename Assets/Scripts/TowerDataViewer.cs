@@ -70,6 +70,12 @@ public class TowerDataViewer : MonoBehaviour
             imageTower.rectTransform.sizeDelta = new Vector2(88, 59);
             textDamage.text = "Dmg: " + currentTower.AttackDamage + " + " + "<color=green>" + currentTower.AddedDamage.ToString("F1") + "</color>";
             textAttackRate.text = "Fire Rate: " + currentTower.AttackRate;
+            textAttackRange.text = "Range: " + currentTower.AttackRange;
+        }
+        else if (currentTower.WeaponType == WeaponType.Area)
+        {
+            textDamage.text = "Dmg: " + currentTower.AreaDamage + " + " + "<color=green>" + currentTower.AddedDamage.ToString("F1") + "</color>";
+            textAttackRange.text = "Impact Range: " + currentTower.AreaOfImpact;
         }
         else
         {
@@ -83,7 +89,12 @@ public class TowerDataViewer : MonoBehaviour
             {
                 textDamage.text = "Buff: " + currentTower.Buff * 100 + "%"; 
             }
+            else if(currentTower.WeaponType == WeaponType.Money)
+            {
+                textDamage.text = "Money: " + currentTower.Earning + "/s";
+            }
 
+            textAttackRange.text = "Range: " + currentTower.AttackRange;
 
             textAttackRate.text = "Fire Rate: -";
         }
@@ -91,7 +102,7 @@ public class TowerDataViewer : MonoBehaviour
 
         imageTower.sprite = currentTower.TowerSprite;
         //textAttackRate.text = "Fire Rate: " + currentTower.AttackRate;
-        textAttackRange.text = "Range: " + currentTower.AttackRange;
+        
         textLevel.text = "Level: " + currentTower.Level;
 
         buttonUpgrade.interactable = currentTower.Level < currentTower.MaxLevel ? true : false;

@@ -17,17 +17,17 @@ public class FriendPageBase : MonoBehaviour
 
 	private	MemoryPool	memoryPool;
 
-	//private void Awake()
-	//{
-	//	memoryPool = new MemoryPool(friendPrefab, parentContent);
-	//}
+	private void Awake()
+	{
+		memoryPool = new MemoryPool(friendPrefab, parentContent);
+	}
 
 	public void Activate(FriendData friend)
 	{
 		if ( textSystem.activeSelf ) textSystem.SetActive(false);
 
-		//GameObject item = memoryPool.ActivatePoolItem();
-		//item.GetComponent<FriendBase>().Setup(backendFriendSystem, this, friend);
+		GameObject item = memoryPool.ActivatePoolItem();
+		item.GetComponent<FriendBase>().Setup(backendFriendSystem, this, friend);
 	}
 
 	public void ActivateAll(List<FriendData> friendList)
