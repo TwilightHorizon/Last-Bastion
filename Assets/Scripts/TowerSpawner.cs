@@ -17,11 +17,14 @@ public class TowerSpawner : MonoBehaviour
 
     [SerializeField]
     private SystemTextViewer systemTextViewer;
-
+    [SerializeField]
+    private GameController gameController;
     private bool isOnTowerButton = false;
     private GameObject followTowerClone = null;
 
     private int towerType;
+
+
 
     public void ReadyToSpawnTower(int type)
     {
@@ -70,7 +73,7 @@ public class TowerSpawner : MonoBehaviour
 
         GameObject clone = Instantiate(towerTemplate[towerType].towerPrefab, position, Quaternion.identity);
 
-        clone.GetComponent<TowerWeapon>().Setup(this, enemySpawner, playerGold, tile);
+        clone.GetComponent<TowerWeapon>().Setup(this, enemySpawner, playerGold, tile, gameController);
 
 
         OnBuffAllBuffTowers();

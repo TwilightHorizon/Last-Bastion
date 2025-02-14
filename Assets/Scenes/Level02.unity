@@ -14297,6 +14297,7 @@ MonoBehaviour:
   effectGameOver: {fileID: 0}
   effectVictory: {fileID: 0}
   stageNumber: 2
+  isWaveOn: 0
 --- !u!4 &1838760456
 Transform:
   m_ObjectHideFlags: 0
@@ -15575,6 +15576,7 @@ MonoBehaviour:
   enemySpawner: {fileID: 413252166}
   playerGold: {fileID: 743191551}
   systemTextViewer: {fileID: 620738900}
+  gameController: {fileID: 1838760455}
 --- !u!4 &2095780826
 Transform:
   m_ObjectHideFlags: 0

@@ -86,8 +86,13 @@ public class TowerWeapon : MonoBehaviour
         get => buffLevel;   
     }
 
-    public void Setup(TowerSpawner towerSpawner,  EnemySpawner enemyspawnerrrr, PlayerGold playerGold, Tile ownerTile)
+    private GameController gameController;
+
+    public void Setup(TowerSpawner towerSpawner,  EnemySpawner enemyspawnerrrr, PlayerGold playerGold, Tile ownerTile, GameController gameController)
     {
+
+        this.gameController = gameController;
+
         this.towerSpawner = towerSpawner;
         spriteRenderer = GetComponent<SpriteRenderer>();
         this.ownerTile = ownerTile;
@@ -162,7 +167,11 @@ public class TowerWeapon : MonoBehaviour
         // Debug.Log("Hello");
         while (true)
         {
-            playerGold.CurrentGold += Mathf.RoundToInt(Earning);
+            if (gameController.isWaveOn)
+            {
+                playerGold.CurrentGold += Mathf.RoundToInt(Earning);
+
+            }
             yield return new WaitForSeconds(1.0f);
         }
     }

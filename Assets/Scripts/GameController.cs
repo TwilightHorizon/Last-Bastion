@@ -43,6 +43,8 @@ public class GameController : MonoBehaviour
     [SerializeField]
     private int stageNumber;
 
+    public bool isWaveOn = false;
+
     public int Score
     {
         set => score = Mathf.Max(0, value);

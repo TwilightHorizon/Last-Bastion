@@ -59,6 +59,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void StartWave(Wave wave, bool lastWave)
     {
+        gameController.isWaveOn = true;
         finalWave = lastWave;
         currentWave = wave;
         // infScaling.takeThisNumber = 0;
@@ -110,6 +111,9 @@ public class EnemySpawner : MonoBehaviour
                 yield return new WaitForSeconds(currentWave.spawnTime);
             }
         }
+
+        gameController.isWaveOn = false;
+
         buttonStartWave.interactable = true;
 
         if (finalWave)
