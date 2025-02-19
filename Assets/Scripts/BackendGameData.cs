@@ -43,7 +43,8 @@ public class BackendGameData
             { "gold", userGameData.gold},
             { "jewel", userGameData.jewel },
             { "heart", userGameData.heart },
-            { "dailyBestScore", userGameData.dailyBestScore }
+            { "dailyBestScore", userGameData.dailyBestScore },
+            { "highestStage", userGameData.highestStage   }
         };
 
         Backend.GameData.Insert("USER_DATA", param, callback =>
@@ -92,6 +93,7 @@ public class BackendGameData
                         userGameData.jewel              = int.Parse(gameDataJson[0]["jewel"].ToString());
                         userGameData.heart              = int.Parse(gameDataJson[0]["heart"].ToString());
                         userGameData.dailyBestScore     = int.Parse(gameDataJson[0]["dailyBestScore"].ToString()) ;
+                        userGameData.highestStage       = int.Parse(gameDataJson[0]["highestStage"].ToString());
 
                         onGameDataLoadEvent?.Invoke();
 
@@ -131,7 +133,8 @@ public class BackendGameData
             { "gold", userGameData.gold},
             { "jewel", userGameData.jewel},
             { "heart", userGameData.heart},
-            { "dailyBestScore", userGameData.dailyBestScore }
+            { "dailyBestScore", userGameData.dailyBestScore },
+            { "highestStage", userGameData.highestStage   }
         };
 
         if (string.IsNullOrEmpty(gameDataRowInDate))

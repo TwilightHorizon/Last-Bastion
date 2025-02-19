@@ -8,6 +8,7 @@ public class UserGameData
     public int heart;
 
     public int dailyBestScore;  // 일일 최고 무한모드 점수
+    public int highestStage;    // 최고 스테이지
 
 
     public void Reset()
@@ -19,6 +20,7 @@ public class UserGameData
         jewel = 0;
         heart = 80;
         dailyBestScore = 0;
+        highestStage = 0;
 
     }
 }

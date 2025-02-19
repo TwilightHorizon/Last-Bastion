@@ -81,6 +81,7 @@ public class GameController : MonoBehaviour
             panelStageComplete.SetActive(true);
             textVictoryResultScore.text = score.ToString();
             effectVictory.Play(200, 65); 
+            BackendGameData.Instance.UserGameData.highestStage = Mathf.Max(BackendGameData.Instance.UserGameData.highestStage, stageNumber);
         }
 
 

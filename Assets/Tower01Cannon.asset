@@ -48,3 +48,14 @@ MonoBehaviour:
     attackRange: 2.5
     cost: 300
     sell: 75
+  - sprite: {fileID: 21300000, guid: 2e315c896c5183544a94f79d4c9e736c, type: 3}
+    damage: 100
+    slow: 0
+    buff: 0
+    earning: 0
+    areaDamage: 0
+    areaOfImpact: 0
+    attackRate: 0.2
+    attackRange: 4
+    cost: 4000
+    sell: 1000
