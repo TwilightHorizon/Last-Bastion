@@ -62,6 +62,11 @@ public class TowerWeapon : MonoBehaviour
     public float Earning => towerTemplate.weapon[level].earning;
     public float AreaDamage => towerTemplate.weapon[level].areaDamage;
     public float AreaOfImpact => towerTemplate.weapon[level].areaOfImpact;
+
+    public int UpgradeCost => Level < MaxLevel ? towerTemplate.weapon[level + 1].cost : 0;
+    public int SellCost => towerTemplate.weapon[level].sell;
+
+
     public WeaponType WeaponType => weaponType;
 
     private SpriteRenderer spriteRenderer;

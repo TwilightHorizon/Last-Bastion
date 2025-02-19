@@ -23,7 +23,7 @@ MonoBehaviour:
     areaDamage: 0
     areaOfImpact: 0
     attackRate: 0
-    attackRange: 2
+    attackRange: 3
     cost: 800
     sell: 200
   - sprite: {fileID: 21300000, guid: eb37de8bed4d1454298cbcc81a297fe9, type: 3}
@@ -34,7 +34,7 @@ MonoBehaviour:
     areaDamage: 0
     areaOfImpact: 0
     attackRate: 0
-    attackRange: 2
+    attackRange: 3
     cost: 1400
     sell: 350
   - sprite: {fileID: 21300000, guid: f6dcf381a9294594abae23f657f84019, type: 3}
@@ -45,6 +45,6 @@ MonoBehaviour:
     areaDamage: 0
     areaOfImpact: 0
     attackRate: 0
-    attackRange: 2
+    attackRange: 3.5
     cost: 2000
     sell: 500

@@ -31,6 +31,14 @@ public class TowerDataViewer : MonoBehaviour
     [SerializeField]
     private SystemTextViewer systemTextViewer;
 
+    [SerializeField]
+    private TextMeshProUGUI textUpgradeCost;
+
+    [SerializeField]
+    private TextMeshProUGUI textSellCost;
+
+
+
     private TowerWeapon currentTower;
     private void Awake()
     {
@@ -104,6 +112,10 @@ public class TowerDataViewer : MonoBehaviour
         //textAttackRate.text = "Fire Rate: " + currentTower.AttackRate;
         
         textLevel.text = "Level: " + currentTower.Level;
+        textUpgradeCost.text = "$"+currentTower.UpgradeCost.ToString();
+        textSellCost.text = "$" + currentTower.SellCost.ToString();
+
+
 
         buttonUpgrade.interactable = currentTower.Level < currentTower.MaxLevel ? true : false;
 
