@@ -15184,8 +15184,8 @@ MonoBehaviour:
   towerAttackRange: {fileID: 609494785}
   buttonUpgrade: {fileID: 129033723}
   systemTextViewer: {fileID: 959224963}
-  textUpgradeCost: {fileID: 0}
-  textSellCost: {fileID: 0}
+  textUpgradeCost: {fileID: 2020756389}
+  textSellCost: {fileID: 1137724548}
 --- !u!1 &2074538801
 GameObject:
   m_ObjectHideFlags: 0

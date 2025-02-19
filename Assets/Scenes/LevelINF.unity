@@ -2756,7 +2756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - spawnTime: 1
+  - spawnTime: 0.4
     maxEnemyCount: ffe0f505
     enemyPrefabs:
     - {fileID: 3070370818181417406, guid: 792592e1c7f919c41a93f251e2a68fa3, type: 3}
@@ -2773,7 +2773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbd4441e77ab1e4d92080bd5456447e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 2
+  scale: 3
   takeThisNumber: 0
 --- !u!1001 &413406433
 PrefabInstance:
@@ -5632,7 +5632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98c3a6e9ac9f9974db4423eb219fa3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentGold: 2000
+  currentGold: 9999
 --- !u!1001 &768208098
 PrefabInstance:
   m_ObjectHideFlags: 0

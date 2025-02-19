@@ -5963,7 +5963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 100
-  gameController: {fileID: 0}
+  gameController: {fileID: 1838760455}
 --- !u!4 &743191550
 Transform:
   m_ObjectHideFlags: 0

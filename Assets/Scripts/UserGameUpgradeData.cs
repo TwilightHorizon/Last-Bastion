@@ -32,7 +32,7 @@ public class UserGameUpgradeData
         towerTwoUpgrade.Add("cost", 0);
 
         towerThreeUpgrade.Add("slow", 0);
-        towerThreeUpgrade.Add("attackSpeed", 0);
+        // towerThreeUpgrade.Add("attackSpeed", 0);
         towerThreeUpgrade.Add("range", 0);
         towerThreeUpgrade.Add("cost", 0);
 
@@ -47,8 +47,8 @@ public class UserGameUpgradeData
         towerFiveUpgrade.Add("cost", 0);
 
         towerSixUpgrade.Add("damage", 0);
-        towerSixUpgrade.Add("areaDamage", 0);
-        towerSixUpgrade.Add("attackSpeed", 0);
+        // towerSixUpgrade.Add("areaDamage", 0);
+        // towerSixUpgrade.Add("attackSpeed", 0);
         towerSixUpgrade.Add("range", 0);
         towerSixUpgrade.Add("cost", 0);
     }
