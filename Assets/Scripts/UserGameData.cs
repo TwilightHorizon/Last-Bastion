@@ -16,7 +16,7 @@ public class UserGameData
 
         level = 1;
         experience = 0;
-        gold = 0;
+        gold = 100;
         jewel = 0;
         heart = 80;
         dailyBestScore = 0;

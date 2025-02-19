@@ -73,6 +73,7 @@ public class RegisterAccount : LoginBase
 
                         // After success in creating new account, create new gamedata for this new user account
                         BackendGameData.Instance.GameDataInsert();
+                        BackendGameUpgradeData.Instance.GameUpgradeDataInsert();
 
                         Utils.LoadScene(SceneNames.Lobby);
                     }

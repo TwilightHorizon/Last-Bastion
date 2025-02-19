@@ -23,6 +23,7 @@ public class LobbyScenario : MonoBehaviour
     private void Start()
     {
         BackendGameData.Instance.GameDataLoad();
+        BackendGameUpgradeData.Instance.GameDataLoad();
     }
 
 }

@@ -21,35 +21,35 @@ public class UserGameUpgradeData
         towerFiveUpgrade = new Dictionary<string, int>();
         towerSixUpgrade = new Dictionary<string, int>();
 
-        towerOneUpgrade.Add("damage", 0);
-        towerOneUpgrade.Add("attackSpeed", 0);
-        towerOneUpgrade.Add("range", 0);
-        towerOneUpgrade.Add("cost", 0);
+        towerOneUpgrade.Add("damage", 1);
+        towerOneUpgrade.Add("attackSpeed", 1);
+        towerOneUpgrade.Add("range", 1);
+        towerOneUpgrade.Add("cost", 1);
 
-        towerTwoUpgrade.Add("damage", 0);
+        towerTwoUpgrade.Add("damage", 1);
         // towerTwoUpgrade.Add("attackSpeed", 0);
-        towerTwoUpgrade.Add("range", 0);
-        towerTwoUpgrade.Add("cost", 0);
+        towerTwoUpgrade.Add("range", 1);
+        towerTwoUpgrade.Add("cost", 1);
 
-        towerThreeUpgrade.Add("slow", 0);
+        towerThreeUpgrade.Add("slow", 1);
         // towerThreeUpgrade.Add("attackSpeed", 0);
-        towerThreeUpgrade.Add("range", 0);
-        towerThreeUpgrade.Add("cost", 0);
+        towerThreeUpgrade.Add("range", 1);
+        towerThreeUpgrade.Add("cost", 1);
 
-        towerFourUpgrade.Add("buff", 0);
+        towerFourUpgrade.Add("buff", 1);
         // towerFourUpgrade.Add("attackSpeed", 0);
-        towerFourUpgrade.Add("range", 0);
-        towerFourUpgrade.Add("cost", 0);
+        towerFourUpgrade.Add("range", 1);
+        towerFourUpgrade.Add("cost", 1);
 
-        towerFiveUpgrade.Add("earning", 0);
+        towerFiveUpgrade.Add("earning", 1);
         // towerFiveUpgrade.Add("attackSpeed", 0);
         // towerFiveUpgrade.Add("range", 0);
-        towerFiveUpgrade.Add("cost", 0);
+        towerFiveUpgrade.Add("cost", 1);
 
-        towerSixUpgrade.Add("damage", 0);
+        towerSixUpgrade.Add("damage", 1);
         // towerSixUpgrade.Add("areaDamage", 0);
         // towerSixUpgrade.Add("attackSpeed", 0);
-        towerSixUpgrade.Add("range", 0);
-        towerSixUpgrade.Add("cost", 0);
+        towerSixUpgrade.Add("range", 01);
+        towerSixUpgrade.Add("cost", 1);
     }
 }
