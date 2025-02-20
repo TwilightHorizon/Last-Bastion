@@ -19,7 +19,7 @@ MonoBehaviour:
     damage: 0
     slow: 0
     buff: 0
-    earning: 5
+    earning: 30
     areaDamage: 0
     areaOfImpact: 0
     attackRate: 0
@@ -30,21 +30,32 @@ MonoBehaviour:
     damage: 0
     slow: 0
     buff: 0
-    earning: 10
+    earning: 50
     areaDamage: 0
     areaOfImpact: 0
     attackRate: 0
     attackRange: 0
     cost: 1200
     sell: 300
-  - sprite: {fileID: 21300000, guid: 6129a166ca6330e4180d87413daa57ae, type: 3}
+  - sprite: {fileID: 21300000, guid: 16f80f06a371b2f46b0bc7365cdff2ad, type: 3}
     damage: 0
     slow: 0
     buff: 0
-    earning: 20
+    earning: 150
     areaDamage: 0
     areaOfImpact: 0
     attackRate: 0
     attackRange: 0
     cost: 1500
     sell: 375
+  - sprite: {fileID: 21300000, guid: 6129a166ca6330e4180d87413daa57ae, type: 3}
+    damage: 0
+    slow: 0
+    buff: 0
+    earning: 300
+    areaDamage: 0
+    areaOfImpact: 0
+    attackRate: 0
+    attackRange: 0
+    cost: 2000
+    sell: 500

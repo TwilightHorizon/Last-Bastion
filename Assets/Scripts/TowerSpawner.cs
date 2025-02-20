@@ -24,7 +24,18 @@ public class TowerSpawner : MonoBehaviour
 
     private int towerType;
 
+    
+    private Dictionary<string, int>[] towerUpgrades = new Dictionary<string, int>[6];
 
+    private void Awake()
+    {
+        towerUpgrades[0] = BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade;
+        towerUpgrades[1] = BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade;
+        towerUpgrades[2] = BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade;
+        towerUpgrades[3] = BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade;
+        towerUpgrades[4] = BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFiveUpgrade;
+        towerUpgrades[5] = BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade;
+    }
 
     public void ReadyToSpawnTower(int type)
     {
@@ -73,7 +84,7 @@ public class TowerSpawner : MonoBehaviour
 
         GameObject clone = Instantiate(towerTemplate[towerType].towerPrefab, position, Quaternion.identity);
 
-        clone.GetComponent<TowerWeapon>().Setup(this, enemySpawner, playerGold, tile, gameController);
+        clone.GetComponent<TowerWeapon>().Setup(this, enemySpawner, playerGold, tile, gameController, towerUpgrades[towerType]);
 
 
         OnBuffAllBuffTowers();

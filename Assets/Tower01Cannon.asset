@@ -27,7 +27,7 @@ MonoBehaviour:
     cost: 50
     sell: 12
   - sprite: {fileID: 21300000, guid: 4531d9765cccf66488b8bbea042a00b3, type: 3}
-    damage: 15
+    damage: 12
     slow: 0
     buff: 0
     earning: 0
@@ -38,7 +38,7 @@ MonoBehaviour:
     cost: 150
     sell: 37
   - sprite: {fileID: 21300000, guid: d76e9ee18cc0d3740b2c99aa8cdc4b59, type: 3}
-    damage: 20
+    damage: 18
     slow: 0
     buff: 0
     earning: 0

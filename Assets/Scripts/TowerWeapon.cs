@@ -79,6 +79,11 @@ public class TowerWeapon : MonoBehaviour
 
     private int buffLevel;
 
+
+    // For Upgrades
+    private Dictionary<string, int> upgrades;
+
+
     public float AddedDamage
     {
         set => addedDamage = Mathf.Max(0, value);
@@ -93,11 +98,13 @@ public class TowerWeapon : MonoBehaviour
 
     private GameController gameController;
 
-    public void Setup(TowerSpawner towerSpawner,  EnemySpawner enemyspawnerrrr, PlayerGold playerGold, Tile ownerTile, GameController gameController)
+
+
+    public void Setup(TowerSpawner towerSpawner,  EnemySpawner enemyspawnerrrr, PlayerGold playerGold, Tile ownerTile, GameController gameController, Dictionary<string, int> upgrades)
     {
 
         this.gameController = gameController;
-
+        this.upgrades = upgrades;
         this.towerSpawner = towerSpawner;
         spriteRenderer = GetComponent<SpriteRenderer>();
         this.ownerTile = ownerTile;
