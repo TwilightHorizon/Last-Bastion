@@ -13149,6 +13149,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b92bdd8825b6e44fa2bc1273572d62a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerTemplate:
+  - {fileID: 11400000, guid: d8b433bf19cca724394238025e6d46d7, type: 2}
+  - {fileID: 11400000, guid: 99a4e61fdf09df447b4c39fe51da49ff, type: 2}
+  - {fileID: 11400000, guid: 88d9cd919a5cfe746a8abf9f6a5f1f0f, type: 2}
+  - {fileID: 11400000, guid: 51b9e432557f2b44f9411826fee9a692, type: 2}
+  - {fileID: 11400000, guid: 955ebfb596c02694181569377f3a3de2, type: 2}
+  - {fileID: 11400000, guid: bbee1d859963e8640b26af93f4390252, type: 2}
   isInfinite: 1
   enemySpawner: {fileID: 413252166}
   panelGameOver: {fileID: 1866325984}

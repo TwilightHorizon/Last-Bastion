@@ -92,6 +92,11 @@ public class MarketControl : MonoBehaviour
 
     public void ButtonOne()
     {
+        if(BackendGameData.Instance.UserGameData.gold < 20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["damage"]-1)
+        {
+            return;
+        }
+
         // tower 1 damage
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["damage"] += 1;
         buttonTexts[0].text = "Damage Lv." + BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["damage"].ToString() 
@@ -101,42 +106,58 @@ public class MarketControl : MonoBehaviour
     }
     public void ButtonTwo()
     {
-
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["attackSpeed"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["attackSpeed"] += 1;
         buttonTexts[1].text = $"Attack Speed Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["attackSpeed"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["attackSpeed"]})";
-        BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["attackSpeed"]-1);
-
+        BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["attackSpeed"] - 1);
         topPanelViewer.UpdateGameData();
     }
 
     public void ButtonThree()
     {
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["range"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["range"] += 1;
         buttonTexts[2].text = $"Attack Range Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["range"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["range"]})";
-        BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["range"]-1);
+        BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["range"] - 1);
         topPanelViewer.UpdateGameData();
     }
 
     public void ButtonFour()
     {
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["cost"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["cost"] += 1;
         buttonTexts[3].text = $"Price Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["cost"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["cost"]})";
-        BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["cost"]-1);
-
+        BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["cost"] - 1);
         topPanelViewer.UpdateGameData();
     }
 
     public void ButtonFive()
     {
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["damage"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["damage"] += 1;
         buttonTexts[4].text = $"Damage Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["damage"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["damage"]})";
-        BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["damage"]-1);
-
+        BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["damage"] - 1);
         topPanelViewer.UpdateGameData();
     }
 
     public void ButtonSix()
     {
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["range"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["range"] += 1;
         buttonTexts[5].text = $"Attack Range Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["range"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["range"]})";
         BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["range"] - 1);
@@ -145,6 +166,10 @@ public class MarketControl : MonoBehaviour
 
     public void ButtonSeven()
     {
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["cost"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["cost"] += 1;
         buttonTexts[6].text = $"Price Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["cost"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["cost"]})";
         BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["cost"] - 1);
@@ -153,6 +178,10 @@ public class MarketControl : MonoBehaviour
 
     public void ButtonEight()
     {
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["slow"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["slow"] += 1;
         buttonTexts[7].text = $"Slow Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["slow"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["slow"]})";
         BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["slow"] - 1);
@@ -161,6 +190,10 @@ public class MarketControl : MonoBehaviour
 
     public void ButtonNine()
     {
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["range"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["range"] += 1;
         buttonTexts[8].text = $"Attack Range Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["range"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["range"]})";
         BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["range"] - 1);
@@ -169,6 +202,10 @@ public class MarketControl : MonoBehaviour
 
     public void ButtonTen()
     {
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["cost"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["cost"] += 1;
         buttonTexts[9].text = $"Price Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["cost"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["cost"]})";
         BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["cost"] - 1);
@@ -177,6 +214,10 @@ public class MarketControl : MonoBehaviour
 
     public void ButtonEleven()
     {
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["buff"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["buff"] += 1;
         buttonTexts[10].text = $"Buff Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["buff"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["buff"]})";
         BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["buff"] - 1);
@@ -185,14 +226,22 @@ public class MarketControl : MonoBehaviour
 
     public void ButtonTwelve()
     {
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["range"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["range"] += 1;
         buttonTexts[11].text = $"Attack Range Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["range"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["range"]})";
-        BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["range"]-1);
+        BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["range"] - 1);
         topPanelViewer.UpdateGameData();
     }
 
     public void ButtonThirteen()
     {
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["cost"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["cost"] += 1;
         buttonTexts[12].text = $"Price Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["cost"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["cost"]})";
         BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["cost"] - 1);
@@ -201,6 +250,10 @@ public class MarketControl : MonoBehaviour
 
     public void ButtonFourteen()
     {
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFiveUpgrade["earning"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFiveUpgrade["earning"] += 1;
         buttonTexts[13].text = $"Earning Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFiveUpgrade["earning"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFiveUpgrade["earning"]})";
         BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFiveUpgrade["earning"] - 1);
@@ -209,6 +262,10 @@ public class MarketControl : MonoBehaviour
 
     public void ButtonFifteen()
     {
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFiveUpgrade["cost"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFiveUpgrade["cost"] += 1;
         buttonTexts[14].text = $"Price Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFiveUpgrade["cost"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFiveUpgrade["cost"]})";
         BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFiveUpgrade["cost"] - 1);
@@ -217,6 +274,10 @@ public class MarketControl : MonoBehaviour
 
     public void ButtonSixteen()
     {
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["damage"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["damage"] += 1;
         buttonTexts[15].text = $"Damage Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["damage"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["damage"]})";
         BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["damage"] - 1);
@@ -225,20 +286,27 @@ public class MarketControl : MonoBehaviour
 
     public void ButtonSeventeen()
     {
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["range"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["range"] += 1;
         buttonTexts[16].text = $"Attack Range Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["range"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["range"]})";
-        BackendGameData.Instance.UserGameData.gold -= 20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["range"];
+        BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["range"] - 1);
         topPanelViewer.UpdateGameData();
     }
 
     public void ButtonEighteen()
     {
+        if (BackendGameData.Instance.UserGameData.gold < 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["cost"] - 1))
+        {
+            return;
+        }
         BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["cost"] += 1;
         buttonTexts[17].text = $"Price Lv.{BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["cost"]} ({20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["cost"]})";
-        BackendGameData.Instance.UserGameData.gold -= 20 * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["cost"];
+        BackendGameData.Instance.UserGameData.gold -= 20 * (BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["cost"] - 1);
         topPanelViewer.UpdateGameData();
     }
-
 
 
 }

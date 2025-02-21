@@ -16,6 +16,7 @@ public class StageButtonControl : MonoBehaviour
         for (int i = 0; i < button.Length; i++)
         {
             button[i].enabled = false;
+            // button[i].GetComponent<SpriteRenderer>().color = new Color()
             
         }
 

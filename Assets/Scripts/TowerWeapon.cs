@@ -143,7 +143,7 @@ public class TowerWeapon : MonoBehaviour
             {
                 if(weapon.WeaponType == WeaponType.Cannon || weapon.WeaponType == WeaponType.Laser || weapon.WeaponType == WeaponType.Area)
                 {
-                    weapon.AddedDamage = weapon.AttackDamage * (towerTemplate.weapon[level].buff);
+                    weapon.AddedDamage = (weapon.AttackDamage) * (towerTemplate.weapon[level].buff);
                     weapon.BuffLevel = Level;
                 }
             }
@@ -163,7 +163,7 @@ public class TowerWeapon : MonoBehaviour
                 continue;
             }
 
-            if (Vector3.Distance(weapon.transform.position, transform.position) <= towerTemplate.weapon[level].attackRange)
+            if (Vector3.Distance(weapon.transform.position, transform.position) <= towerTemplate.weapon[level].attackRange )
             {
                 if (weapon.WeaponType == WeaponType.Cannon || weapon.WeaponType == WeaponType.Laser || weapon.WeaponType == WeaponType.Area)
                 {
@@ -331,9 +331,9 @@ public class TowerWeapon : MonoBehaviour
                 break;
             }
 
-
-            yield return new WaitForSeconds(towerTemplate.weapon[level].attackRate);
             SpawnBomb();
+            yield return new WaitForSeconds(towerTemplate.weapon[level].attackRate);
+            
         }
         // yield return null;
     }

@@ -6,6 +6,10 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
 
+
+    [SerializeField]
+    TowerTemplate[] towerTemplate;
+
     [SerializeField]
     private bool isInfinite = false;
 
@@ -60,8 +64,8 @@ public class GameController : MonoBehaviour
         if (IsGameOver) return;
         IsGameOver = true;
 
-        
-        
+
+        Reverse();
 
         if(playerHP.CurrentHP <= 0)
         {
@@ -95,6 +99,7 @@ public class GameController : MonoBehaviour
 
             
         }
+        BackendGameData.Instance.UserGameData.gold += score*stageNumber*1000;
         BackendGameData.Instance.UserGameData.experience += 25 * stageNumber; // TODO: make increment changed based on CurrentScore or map
         if (BackendGameData.Instance.UserGameData.experience >= 100 * (BackendGameData.Instance.UserGameData.level / 2) + 100)
         {
@@ -113,6 +118,58 @@ public class GameController : MonoBehaviour
 
     public void AfterGameOver()
     {
+    }
+
+
+    private void Reverse()
+    {
+        for (int i = 0; i < towerTemplate[0].weapon.Length; i++)
+        {
+            towerTemplate[0].weapon[i].damage -= BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["damage"];
+            towerTemplate[0].weapon[i].attackRange -= 0.05f * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["range"];
+            towerTemplate[0].weapon[i].attackRate += 0.001f * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["attackSpeed"];
+            towerTemplate[0].weapon[i].cost += BackendGameUpgradeData.Instance.UserGameUpgradeData.towerOneUpgrade["cost"];
+        }
+
+        // Reverse Tower Type 2
+        for (int i = 0; i < towerTemplate[1].weapon.Length; i++)
+        {
+            towerTemplate[1].weapon[i].damage -= BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["damage"];
+            towerTemplate[1].weapon[i].attackRange -= 0.05f * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["range"];
+            towerTemplate[1].weapon[i].cost += BackendGameUpgradeData.Instance.UserGameUpgradeData.towerTwoUpgrade["cost"];
+        }
+
+        // Reverse Tower Type 3
+        for (int i = 0; i < towerTemplate[2].weapon.Length; i++)
+        {
+            towerTemplate[2].weapon[i].slow -= 0.01f * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["slow"];
+            towerTemplate[2].weapon[i].attackRange -= 0.05f * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["range"];
+            towerTemplate[2].weapon[i].cost += BackendGameUpgradeData.Instance.UserGameUpgradeData.towerThreeUpgrade["cost"];
+        }
+
+        // Reverse Tower Type 4
+        for (int i = 0; i < towerTemplate[3].weapon.Length; i++)
+        {
+            towerTemplate[3].weapon[i].buff -= 0.01f * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["buff"];
+            towerTemplate[3].weapon[i].attackRange -= 0.05f * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["range"];
+            towerTemplate[3].weapon[i].cost += BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFourUpgrade["cost"];
+        }
+
+        // Reverse Tower Type 5
+        for (int i = 0; i < towerTemplate[4].weapon.Length; i++)
+        {
+            towerTemplate[4].weapon[i].earning -= BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFiveUpgrade["earning"];
+            towerTemplate[4].weapon[i].cost += BackendGameUpgradeData.Instance.UserGameUpgradeData.towerFiveUpgrade["cost"];
+        }
+
+        // Reverse Tower Type 6
+        for (int i = 0; i < towerTemplate[5].weapon.Length; i++)
+        {
+            towerTemplate[5].weapon[i].damage -= BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["damage"];
+            towerTemplate[5].weapon[i].attackRange -= 0.05f * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["range"];
+            // towerTemplate[5].weapon[i].attackRate += 0.01f * BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["attackSpeed"];
+            towerTemplate[5].weapon[i].cost += BackendGameUpgradeData.Instance.UserGameUpgradeData.towerSixUpgrade["cost"];
+        }
     }
 
 }
